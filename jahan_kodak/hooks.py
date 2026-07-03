@@ -253,5 +253,9 @@ fixtures = [
     "Server Script",
     "Property Setter",
     "Print Format",
-    "Custom DocPerm"
+    "Custom DocPerm",
+    "Workflow",
+    "Workflow State",
+    "Workflow Action Master",
+    "Item Attribute"
 ]
