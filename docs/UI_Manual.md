@@ -95,3 +95,28 @@ We have added `Cargo Company`, `Cargo Tracking Number`, and `Expected Arrival Da
 3. Scroll down to the fields table. You will see our custom Cargo fields there.
 4. You can freely rename them, change their position, or add new rows (e.g., `Driver Phone Number`) just by clicking **Add Row**.
 5. Click **Update** to save the changes instantly across the entire system.
+
+### 3. Business Scenario: Branch vs Central Purchasing
+If staff asks: *"How do we order things if branches aren't allowed to buy from suppliers?"*
+**The Answer:** 
+* Branches **never** use the "Purchase" purpose on a Material Request. 
+* A branch user creates a Material Request and sets the purpose to **Material Transfer** (requesting goods from the Central Warehouse). 
+* The custom workflow automatically skips Procurement and sends this directly to the Central Warehouse team for approval and dispatch (via a Stock Entry).
+* If the Central Warehouse is out of stock, *they* (the main office) create a Material Request for **Purchase**, which then goes through the strict Branch Manager and Procurement approval flow.
+
+### 4. Setting up a Branch Manager & Data Security
+If staff asks: *"How do we assign a manager to a branch, and ensure they only see their own branch's data?"*
+**The Answer:**
+We use Roles and User Permissions.
+1. Assign the user the **Branch Manager** role from their User Profile.
+2. Go to **User Permissions** (search in the global bar).
+3. Create a new User Permission linking that user to their specific branch (e.g., `Kabul Center`).
+4. **CRITICAL:** Ensure the **"Apply to all Document Types"** checkbox is checked.
+5. **The Result:** The system will now invisibly filter every database query for that user. They will only see Material Requests, Sales, and Inventory for `Kabul Center`. It is mathematically impossible for them to view another branch's data.
+
+### 5. Workflow System Notifications
+If staff asks: *"Why aren't we getting email notifications for approvals?"*
+**The Answer:**
+* We rely on **System Notifications** to prevent email spam. 
+* When a document requires a Branch Manager's approval, the system generates a "To Do" record specifically for users with the Branch Manager role who have permission for that branch.
+* This "To Do" instantly triggers the **Bell Icon** notification in the top right of the ERPNext screen. Clicking the bell takes the manager straight to the document they need to approve.
