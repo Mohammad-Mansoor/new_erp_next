@@ -61,5 +61,23 @@
   "name": "Received",
   "style": "",
   "workflow_state_name": "Received"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-07-04 15:54:33.208458",
+  "name": "Branch Manager Approved",
+  "style": "",
+  "workflow_state_name": "Branch Manager Approved"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-07-04 15:54:33.224489",
+  "name": "Procurement Approved",
+  "style": "",
+  "workflow_state_name": "Procurement Approved"
  }
 ]

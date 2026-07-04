@@ -40,5 +40,19 @@
   "modified": "2026-07-03 18:58:35.452499",
   "name": "Receive at Branch",
   "workflow_action_name": "Receive at Branch"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-07-04 15:54:33.232601",
+  "name": "BM Approve",
+  "workflow_action_name": "BM Approve"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-07-04 15:54:33.239957",
+  "name": "Procurement Approve",
+  "workflow_action_name": "Procurement Approve"
  }
 ]

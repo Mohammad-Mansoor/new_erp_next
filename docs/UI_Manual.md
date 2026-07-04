@@ -74,3 +74,24 @@ This document provides step-by-step instructions on how to manually create or ma
 **Important things to keep in mind:**
 - **Dynamic Naming:** The script is 100% dynamic. It will read whatever attributes you added to the template in the exact order you added them. It pulls the 3-letter abbreviation from the `Item Attribute Value` table. 
 - If the SKU generates incorrectly (e.g., it says `XXX`), it means you forgot to set an Abbreviation in the Item Attribute Value settings, so it didn't know what letters to use!
+
+---
+
+## Phase 4: Procurement & Custom Fields
+
+### 1. Modifying the Flexible Workflows
+Unlike rigid hardcoded workflows, we have built the **"JK Material Request Flow"** using ERPNext's native Workflow engine. It intelligently routes both Transfers and Purchases based on conditions.
+**How to manage it from the UI:**
+1. Type **Workflow List** in the global search bar.
+2. Click on **JK Material Request Flow**.
+3. Under the **Transitions** table, you can freely change exactly who is allowed to approve what by modifying the `Allowed` Role column.
+4. If you need a new approval stage (e.g., *CEO Approval*), simply add a new State and define the Transition! 
+
+### 2. Modifying Custom Fields (Cargo Tracking)
+We have added `Cargo Company`, `Cargo Tracking Number`, and `Expected Arrival Date` to the Purchase Order. Because this is flexible, you can add more at any time without a developer.
+**How to manage it from the UI:**
+1. Open any **Purchase Order** and click the **three dots** in the top right.
+2. Select **Customize**.
+3. Scroll down to the fields table. You will see our custom Cargo fields there.
+4. You can freely rename them, change their position, or add new rows (e.g., `Driver Phone Number`) just by clicking **Add Row**.
+5. Click **Update** to save the changes instantly across the entire system.

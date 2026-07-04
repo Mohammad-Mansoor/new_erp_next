@@ -471,7 +471,7 @@ During the analysis of the Scope Document (Doc 1) and JK-Workflow PDF (Doc 2), t
 **Deployment Strategy:** Custom Scripts
 
 #### Task 4.1: Material Request Approval Workflow
-**Status:** ⬜ Not Started
+**Status:** 🟩 Completed
 **Purpose:** Enforce Branch Manager and Procurement Approval.
 **Business Requirement Reference:** Scope 4
 **Workflow Reference:** Workflow General Approvals
@@ -517,8 +517,8 @@ During the analysis of the Scope Document (Doc 1) and JK-Workflow PDF (Doc 2), t
 **Regression Test Requirements:**
 
 ##### Subtasks
-- [ ] Define Workflow States
-- [ ] Assign Roles
+- [x] Define Workflow States
+- [x] Assign Roles
 
 ##### GitHub Workflow & Deployment
 - **Git Branch Name:** `feat/TASK-4-1`
@@ -528,7 +528,7 @@ During the analysis of the Scope Document (Doc 1) and JK-Workflow PDF (Doc 2), t
 ---
 
 #### Task 4.2: Purchase Order to Cargo Receive
-**Status:** ⬜ Not Started
+**Status:** 🟩 Completed
 **Purpose:** Track Goods Shipped by Cargo.
 **Business Requirement Reference:** Scope 4
 **Workflow Reference:** Workflow 1
@@ -574,8 +574,8 @@ During the analysis of the Scope Document (Doc 1) and JK-Workflow PDF (Doc 2), t
 **Regression Test Requirements:**
 
 ##### Subtasks
-- [ ] Add Cargo Tracking fields to PO
-- [ ] Configure PR to land in Receiving Area
+- [x] Add Cargo Tracking fields to PO
+- [x] Configure PR to land in Receiving Area
 
 ##### GitHub Workflow & Deployment
 - **Git Branch Name:** `feat/TASK-4-2`

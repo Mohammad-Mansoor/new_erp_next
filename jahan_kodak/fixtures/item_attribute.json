@@ -112,41 +112,6 @@
   "to_range": 0.0
  },
  {
-  "attribute_name": "Persone category",
-  "disabled": 0,
-  "docstatus": 0,
-  "doctype": "Item Attribute",
-  "from_range": 0.0,
-  "increment": 0.0,
-  "item_attribute_values": [
-   {
-    "abbr": "MENS",
-    "attribute_value": "Mens",
-    "parent": "Persone category",
-    "parentfield": "item_attribute_values",
-    "parenttype": "Item Attribute"
-   },
-   {
-    "abbr": "TEEN",
-    "attribute_value": "Teenagers",
-    "parent": "Persone category",
-    "parentfield": "item_attribute_values",
-    "parenttype": "Item Attribute"
-   },
-   {
-    "abbr": "CH",
-    "attribute_value": "Children",
-    "parent": "Persone category",
-    "parentfield": "item_attribute_values",
-    "parenttype": "Item Attribute"
-   }
-  ],
-  "modified": "2026-07-04 14:56:53.780959",
-  "name": "Persone category",
-  "numeric_values": 0,
-  "to_range": 0.0
- },
- {
   "attribute_name": "Size",
   "disabled": 0,
   "docstatus": 0,
@@ -241,6 +206,41 @@
   ],
   "modified": "2026-06-08 00:19:16.510441",
   "name": "Colour",
+  "numeric_values": 0,
+  "to_range": 0.0
+ },
+ {
+  "attribute_name": "Persone category",
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Item Attribute",
+  "from_range": 0.0,
+  "increment": 0.0,
+  "item_attribute_values": [
+   {
+    "abbr": "MENS",
+    "attribute_value": "Mens",
+    "parent": "Persone category",
+    "parentfield": "item_attribute_values",
+    "parenttype": "Item Attribute"
+   },
+   {
+    "abbr": "TEEN",
+    "attribute_value": "Teenagers",
+    "parent": "Persone category",
+    "parentfield": "item_attribute_values",
+    "parenttype": "Item Attribute"
+   },
+   {
+    "abbr": "CH",
+    "attribute_value": "Children",
+    "parent": "Persone category",
+    "parentfield": "item_attribute_values",
+    "parenttype": "Item Attribute"
+   }
+  ],
+  "modified": "2026-07-04 14:56:53.780959",
+  "name": "Persone category",
   "numeric_values": 0,
   "to_range": 0.0
  }
