@@ -596,7 +596,7 @@ During the analysis of the Scope Document (Doc 1) and JK-Workflow PDF (Doc 2), t
 **Deployment Strategy:** Fixtures
 
 #### Task 5.1: Define Raw Materials and BOM
-**Status:** ⬜ Not Started
+**Status:** 🟩 Completed
 **Purpose:** Setup BOMs for clothing items.
 **Business Requirement Reference:** Scope 5
 **Workflow Reference:** None
@@ -641,9 +641,9 @@ During the analysis of the Scope Document (Doc 1) and JK-Workflow PDF (Doc 2), t
 **Regression Test Requirements:**
 
 ##### Subtasks
-- [ ] Create Raw Material Item Groups
-- [ ] Create sample BOM
-- [ ] Add Operations
+- [x] Create Raw Material Item Groups
+- [x] Create sample BOM
+- [x] Add Operations
 
 ##### GitHub Workflow & Deployment
 - **Git Branch Name:** `feat/TASK-5-1`

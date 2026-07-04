@@ -120,3 +120,38 @@ If staff asks: *"Why aren't we getting email notifications for approvals?"*
 * We rely on **System Notifications** to prevent email spam. 
 * When a document requires a Branch Manager's approval, the system generates a "To Do" record specifically for users with the Branch Manager role who have permission for that branch.
 * This "To Do" instantly triggers the **Bell Icon** notification in the top right of the ERPNext screen. Clicking the bell takes the manager straight to the document they need to approve.
+
+---
+
+## Phase 5: Manufacturing & Production
+
+### 1. Creating Raw Materials
+Before you can manufacture a shirt, you need raw materials (like fabric and thread) in your system.
+**How to do it from the UI:**
+1. Go to **Item List** and click **Add Item**.
+2. Create your raw material (e.g., `Cotton Fabric - Blue`).
+3. **CRITICAL:** Set the `Item Group` to **Raw Materials - JK**.
+4. Uncheck `Is Sales Item` (because you don't sell raw fabric to customers).
+5. Check `Maintain Stock` and `Is Purchase Item`.
+6. Save the Item.
+
+### 2. Creating the Recipe (Bill of Materials - BOM)
+A Bill of Materials (BOM) is the strict recipe for creating one unit of a finished garment.
+**How to do it from the UI:**
+1. Type **BOM** in the global search bar and click **Add BOM**.
+2. **Item:** Select the finished Variant you want to produce (e.g., `PRO-2026-MEN-NIK-M-BLU`).
+3. **Quantity:** Set to 1 (this recipe makes 1 unit).
+4. **Operations Table:** Add the steps required. We have pre-configured `Cutting`, `Sewing`, `Quality Check`, and `Packaging`. Specify the Workstation (e.g., `Sewing Floor`) and the operating time (in minutes). The system will automatically calculate the labor cost based on the workstation's hourly rate!
+5. **Materials Table:** Add the raw materials needed for this 1 unit (e.g., 2 meters of `Cotton Fabric - Blue`). 
+6. **Save** and **Submit** the BOM.
+
+### 3. The Production Cycle (Work Orders)
+When the factory floor is ready to produce 500 shirts, they use a Work Order.
+**Business Scenario:** The main office wants 500 units of the blue Nike shirt.
+1. Type **Work Order** in the global search and click **Add Work Order**.
+2. Select the Item to manufacture (`PRO-2026-MEN-NIK-M-BLU`).
+3. ERPNext automatically pulls the BOM you just created.
+4. Set the **Qty to Manufacture** to 500.
+5. Select the **Source Warehouse** (where the raw materials are stored, usually Central Warehouse) and the **Target Warehouse** (where the finished 500 shirts will go).
+6. **Save** and **Submit**.
+7. **Start Production:** The factory manager clicks **Start**, which deducts the raw fabric (500 x 2 = 1,000 meters) from the warehouse. When they finish, they click **Finish**, and 500 finished shirts magically appear in the target warehouse, with their precise financial value perfectly calculated!

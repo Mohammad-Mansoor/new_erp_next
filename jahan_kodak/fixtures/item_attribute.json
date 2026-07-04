@@ -49,41 +49,6 @@
   "to_range": 0.0
  },
  {
-  "attribute_name": "Brand",
-  "disabled": 0,
-  "docstatus": 0,
-  "doctype": "Item Attribute",
-  "from_range": 0.0,
-  "increment": 0.0,
-  "item_attribute_values": [
-   {
-    "abbr": "JAH",
-    "attribute_value": "Jahan Kodak",
-    "parent": "Brand",
-    "parentfield": "item_attribute_values",
-    "parenttype": "Item Attribute"
-   },
-   {
-    "abbr": "NIK",
-    "attribute_value": "Nike",
-    "parent": "Brand",
-    "parentfield": "item_attribute_values",
-    "parenttype": "Item Attribute"
-   },
-   {
-    "abbr": "ADI",
-    "attribute_value": "Adidas",
-    "parent": "Brand",
-    "parentfield": "item_attribute_values",
-    "parenttype": "Item Attribute"
-   }
-  ],
-  "modified": "2026-07-04 14:20:26.169823",
-  "name": "Brand",
-  "numeric_values": 0,
-  "to_range": 0.0
- },
- {
   "attribute_name": "Gender",
   "disabled": 0,
   "docstatus": 0,
@@ -206,6 +171,41 @@
   ],
   "modified": "2026-06-08 00:19:16.510441",
   "name": "Colour",
+  "numeric_values": 0,
+  "to_range": 0.0
+ },
+ {
+  "attribute_name": "Brand",
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Item Attribute",
+  "from_range": 0.0,
+  "increment": 0.0,
+  "item_attribute_values": [
+   {
+    "abbr": "JAH",
+    "attribute_value": "Jahan Kodak",
+    "parent": "Brand",
+    "parentfield": "item_attribute_values",
+    "parenttype": "Item Attribute"
+   },
+   {
+    "abbr": "NIK",
+    "attribute_value": "Nike",
+    "parent": "Brand",
+    "parentfield": "item_attribute_values",
+    "parenttype": "Item Attribute"
+   },
+   {
+    "abbr": "ADI",
+    "attribute_value": "Adidas",
+    "parent": "Brand",
+    "parentfield": "item_attribute_values",
+    "parenttype": "Item Attribute"
+   }
+  ],
+  "modified": "2026-07-04 14:20:26.169823",
+  "name": "Brand",
   "numeric_values": 0,
   "to_range": 0.0
  },
