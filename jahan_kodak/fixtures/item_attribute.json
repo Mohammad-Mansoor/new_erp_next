@@ -1,5 +1,152 @@
 [
  {
+  "attribute_name": "Color",
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Item Attribute",
+  "from_range": 0.0,
+  "increment": 0.0,
+  "item_attribute_values": [
+   {
+    "abbr": "BLA",
+    "attribute_value": "Black",
+    "parent": "Color",
+    "parentfield": "item_attribute_values",
+    "parenttype": "Item Attribute"
+   },
+   {
+    "abbr": "WHI",
+    "attribute_value": "White",
+    "parent": "Color",
+    "parentfield": "item_attribute_values",
+    "parenttype": "Item Attribute"
+   },
+   {
+    "abbr": "RED",
+    "attribute_value": "Red",
+    "parent": "Color",
+    "parentfield": "item_attribute_values",
+    "parenttype": "Item Attribute"
+   },
+   {
+    "abbr": "BLU",
+    "attribute_value": "Blue",
+    "parent": "Color",
+    "parentfield": "item_attribute_values",
+    "parenttype": "Item Attribute"
+   },
+   {
+    "abbr": "NAV",
+    "attribute_value": "Navy",
+    "parent": "Color",
+    "parentfield": "item_attribute_values",
+    "parenttype": "Item Attribute"
+   }
+  ],
+  "modified": "2026-07-03 18:58:35.362513",
+  "name": "Color",
+  "numeric_values": 0,
+  "to_range": 0.0
+ },
+ {
+  "attribute_name": "Brand",
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Item Attribute",
+  "from_range": 0.0,
+  "increment": 0.0,
+  "item_attribute_values": [
+   {
+    "abbr": "JAH",
+    "attribute_value": "Jahan Kodak",
+    "parent": "Brand",
+    "parentfield": "item_attribute_values",
+    "parenttype": "Item Attribute"
+   },
+   {
+    "abbr": "NIK",
+    "attribute_value": "Nike",
+    "parent": "Brand",
+    "parentfield": "item_attribute_values",
+    "parenttype": "Item Attribute"
+   },
+   {
+    "abbr": "ADI",
+    "attribute_value": "Adidas",
+    "parent": "Brand",
+    "parentfield": "item_attribute_values",
+    "parenttype": "Item Attribute"
+   }
+  ],
+  "modified": "2026-07-04 14:20:26.169823",
+  "name": "Brand",
+  "numeric_values": 0,
+  "to_range": 0.0
+ },
+ {
+  "attribute_name": "Gender",
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Item Attribute",
+  "from_range": 0.0,
+  "increment": 0.0,
+  "item_attribute_values": [
+   {
+    "abbr": "FM",
+    "attribute_value": "Femal",
+    "parent": "Gender",
+    "parentfield": "item_attribute_values",
+    "parenttype": "Item Attribute"
+   },
+   {
+    "abbr": "ML",
+    "attribute_value": "Male",
+    "parent": "Gender",
+    "parentfield": "item_attribute_values",
+    "parenttype": "Item Attribute"
+   }
+  ],
+  "modified": "2026-07-04 14:55:37.160828",
+  "name": "Gender",
+  "numeric_values": 0,
+  "to_range": 0.0
+ },
+ {
+  "attribute_name": "Persone category",
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Item Attribute",
+  "from_range": 0.0,
+  "increment": 0.0,
+  "item_attribute_values": [
+   {
+    "abbr": "MENS",
+    "attribute_value": "Mens",
+    "parent": "Persone category",
+    "parentfield": "item_attribute_values",
+    "parenttype": "Item Attribute"
+   },
+   {
+    "abbr": "TEEN",
+    "attribute_value": "Teenagers",
+    "parent": "Persone category",
+    "parentfield": "item_attribute_values",
+    "parenttype": "Item Attribute"
+   },
+   {
+    "abbr": "CH",
+    "attribute_value": "Children",
+    "parent": "Persone category",
+    "parentfield": "item_attribute_values",
+    "parenttype": "Item Attribute"
+   }
+  ],
+  "modified": "2026-07-04 14:56:53.780959",
+  "name": "Persone category",
+  "numeric_values": 0,
+  "to_range": 0.0
+ },
+ {
   "attribute_name": "Size",
   "disabled": 0,
   "docstatus": 0,
@@ -94,90 +241,6 @@
   ],
   "modified": "2026-06-08 00:19:16.510441",
   "name": "Colour",
-  "numeric_values": 0,
-  "to_range": 0.0
- },
- {
-  "attribute_name": "Color",
-  "disabled": 0,
-  "docstatus": 0,
-  "doctype": "Item Attribute",
-  "from_range": 0.0,
-  "increment": 0.0,
-  "item_attribute_values": [
-   {
-    "abbr": "BLA",
-    "attribute_value": "Black",
-    "parent": "Color",
-    "parentfield": "item_attribute_values",
-    "parenttype": "Item Attribute"
-   },
-   {
-    "abbr": "WHI",
-    "attribute_value": "White",
-    "parent": "Color",
-    "parentfield": "item_attribute_values",
-    "parenttype": "Item Attribute"
-   },
-   {
-    "abbr": "RED",
-    "attribute_value": "Red",
-    "parent": "Color",
-    "parentfield": "item_attribute_values",
-    "parenttype": "Item Attribute"
-   },
-   {
-    "abbr": "BLU",
-    "attribute_value": "Blue",
-    "parent": "Color",
-    "parentfield": "item_attribute_values",
-    "parenttype": "Item Attribute"
-   },
-   {
-    "abbr": "NAV",
-    "attribute_value": "Navy",
-    "parent": "Color",
-    "parentfield": "item_attribute_values",
-    "parenttype": "Item Attribute"
-   }
-  ],
-  "modified": "2026-07-03 18:58:35.362513",
-  "name": "Color",
-  "numeric_values": 0,
-  "to_range": 0.0
- },
- {
-  "attribute_name": "Brand",
-  "disabled": 0,
-  "docstatus": 0,
-  "doctype": "Item Attribute",
-  "from_range": 0.0,
-  "increment": 0.0,
-  "item_attribute_values": [
-   {
-    "abbr": "JAH",
-    "attribute_value": "Jahan Kodak",
-    "parent": "Brand",
-    "parentfield": "item_attribute_values",
-    "parenttype": "Item Attribute"
-   },
-   {
-    "abbr": "NIK",
-    "attribute_value": "Nike",
-    "parent": "Brand",
-    "parentfield": "item_attribute_values",
-    "parenttype": "Item Attribute"
-   },
-   {
-    "abbr": "ADI",
-    "attribute_value": "Adidas",
-    "parent": "Brand",
-    "parentfield": "item_attribute_values",
-    "parenttype": "Item Attribute"
-   }
-  ],
-  "modified": "2026-07-04 14:20:26.169823",
-  "name": "Brand",
   "numeric_values": 0,
   "to_range": 0.0
  }

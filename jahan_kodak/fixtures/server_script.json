@@ -9,13 +9,13 @@
   "doctype_event": "Before Validate",
   "enable_rate_limit": 0,
   "event_frequency": "All",
-  "modified": "2026-07-04 14:50:48.203374",
+  "modified": "2026-07-04 15:04:14.376325",
   "module": null,
   "name": "Generate SKU for Item",
   "rate_limit_count": 5,
   "rate_limit_seconds": 86400,
   "reference_doctype": "Item",
-  "script": "\nif doc.has_variants == 0 and doc.variant_of:\n    template = frappe.get_doc(\"Item\", doc.variant_of)\n    group = frappe.db.get_value(\"Item Group\", template.item_group, \"name\")[:3].upper() if template.item_group else \"ITM\"\n    year = \"2026\"\n    color = \"N/A\"\n    size = \"N/A\"\n    if doc.get('attributes'):\n        for attr in doc.attributes:\n            if attr.attribute == \"Color\":\n                val = frappe.db.get_value(\"Item Attribute Value\", {\"parent\": \"Color\", \"attribute_value\": attr.attribute_value}, \"abbr\")\n                color = val if val else attr.attribute_value[:3].upper()\n            if attr.attribute == \"Size\":\n                val = frappe.db.get_value(\"Item Attribute Value\", {\"parent\": \"Size\", \"attribute_value\": attr.attribute_value}, \"abbr\")\n                size = val if val else attr.attribute_value[:3].upper()\n                \n    doc.item_code = f\"{group}-{year}-{color}-{size}\"\n    doc.item_name = doc.item_code\n",
+  "script": "\nif doc.has_variants == 0 and doc.variant_of:\n    template = frappe.get_doc(\"Item\", doc.variant_of)\n    group = frappe.db.get_value(\"Item Group\", template.item_group, \"name\")[:3].upper() if template.item_group else \"ITM\"\n    year = \"2026\"\n    \n    attr_abbrs = []\n    if doc.get('attributes'):\n        for attr in doc.attributes:\n            val = frappe.db.get_value(\"Item Attribute Value\", {\"parent\": attr.attribute, \"attribute_value\": attr.attribute_value}, \"abbr\")\n            if not val:\n                val = str(attr.attribute_value)[:3].upper() if attr.attribute_value else \"XXX\"\n            attr_abbrs.append(val)\n            \n    doc.item_code = f\"{group}-{year}-\" + \"-\".join(attr_abbrs)\n    doc.item_name = doc.item_code\n",
   "script_type": "DocType Event"
  }
 ]
