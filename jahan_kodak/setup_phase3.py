@@ -64,7 +64,7 @@ if doc.has_variants == 0 and doc.variant_of:
     year = "2026"
     color = "N/A"
     size = "N/A"
-    if hasattr(doc, 'attributes'):
+    if doc.get('attributes'):
         for attr in doc.attributes:
             if attr.attribute == "Color":
                 val = frappe.db.get_value("Item Attribute Value", {"parent": "Color", "attribute_value": attr.attribute_value}, "abbr")
