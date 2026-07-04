@@ -63,9 +63,14 @@ This document provides step-by-step instructions on how to manually create or ma
 ### 3. Creating Items and Auto-Generating SKUs
 **How to do it from the UI:**
 1. Create an Item Template (Search **Item List** -> **Add Item**). 
-2. Check the **Has Variants** checkbox and select your Attributes (Size, Color).
-3. Save the template.
-4. ERPNext will automatically generate the Variant items. When you click **Save**, our custom background script kicks in and automatically renames the Variant's Item Code and Name to match our strict standard (`Group-Year-Color-Size`).
+2. Check the **Has Variants** checkbox.
+3. In the **Variant Attributes** table, add rows for all the attributes you want (e.g., `Persone category`, `Gender`, `Brand`, `Size`, `Colour`).
+4. **CRITICAL:** Leave the **Attribute Value** column completely blank! Do not try to click or type into it.
+5. Click **Save** in the top right to save the master blueprint.
+6. Once saved, click the **Create** button (top right) -> **Variant** (or use the Multiple Variants tool).
+7. Select your specific values (e.g., Gender: `Men`, Brand: `Nike`) and save. 
+8. The custom background script will instantly kick in and automatically rename the Variant's Item Code and Name by dynamically stringing together all abbreviations! (e.g., `PRO-2026-MEN-NIK...`).
 
 **Important things to keep in mind:**
-- If the SKU generates incorrectly, check if the Item Group or Attribute Abbreviation is set correctly. The script pulls the first 3 letters of the Item Group.
+- **Dynamic Naming:** The script is 100% dynamic. It will read whatever attributes you added to the template in the exact order you added them. It pulls the 3-letter abbreviation from the `Item Attribute Value` table. 
+- If the SKU generates incorrectly (e.g., it says `XXX`), it means you forgot to set an Abbreviation in the Item Attribute Value settings, so it didn't know what letters to use!
