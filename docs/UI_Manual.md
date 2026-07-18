@@ -333,3 +333,29 @@ In the real world, retail gets messy. Here is exactly how to handle common, comp
 3. **The Security Check:** Because we explicitly unchecked "Allow User to Edit Rate" and "Allow User to Edit Discount" in the POS Profile earlier, the cashier is mathematically blocked from just typing "150". 
 4. **The Fix:** The cashier must call the Branch Manager. The manager uses their secure code to apply a 50 AFN Discount to the new `+1` shirt. This absolute security ensures cashiers cannot fake "stains" just to sell cheap shirts to their friends!
 5. The cart total will automatically merge everything (`-200` old + `150` new) and show a final Grand Total of `-50` AFN. You hand the customer 50 AFN, and everyone is happy!
+
+---
+
+## Phase 7: CRM & Loyalty
+
+### 1. Registering a Customer at POS for Loyalty Program
+**How to do it from the UI:**
+1. While in the POS Checkout screen, click on the **Customer** field at the top.
+2. If the customer is new, click **Create New Customer**.
+3. Enter their **Full Name** and **Mobile Number** (the mobile number acts as their unique identifier).
+4. **Crucial Step:** Make sure the **Customer Group** is set to `Loyalty Members` (this group is strictly reserved for the rewards program).
+5. Click **Save** and continue checking out their items.
+
+**Important things to keep in mind:**
+- **Walk-in Customers:** For the majority of your customers who do not wish to participate, leave the Customer field as `Walk-in Customer` (which belongs to the `Retail` group). They will not earn any points.
+- **Double Counting:** Never use the `Walk-in Customer` for the `Loyalty Members` group, otherwise every random purchase will pool points into a massive single account that anyone could exploit!
+
+### 2. Managing Loyalty Points and Redemption
+**How to do it from the UI:**
+1. Type **Loyalty Program** into the global search bar.
+2. Select `Jahan Kodak Rewards`.
+3. Here you can configure the tiers (Bronze, Silver, Gold), the **Collection Factor** (e.g., 100 AFN = 1 point), and the **Auto Opt In** settings.
+4. When a registered Loyalty Member checks out, the POS will display their available points. The cashier can choose to redeem them for a discount right on the payment screen.
+
+**Important things to keep in mind:**
+- **Loyalty Program Expense - JK:** Every time points are redeemed, the system automatically books the cost to this specific expense account. This ensures your Profit & Loss reports accurately reflect the marketing cost of the rewards program.
