@@ -359,3 +359,21 @@ In the real world, retail gets messy. Here is exactly how to handle common, comp
 
 **Important things to keep in mind:**
 - **Loyalty Program Expense - JK:** Every time points are redeemed, the system automatically books the cost to this specific expense account. This ensures your Profit & Loss reports accurately reflect the marketing cost of the rewards program.
+
+### 3. Understanding the Loyalty Program Fields (Field Dictionary)
+When you open the **Loyalty Program** (`Jahan Kodak Rewards`), you will see the following fields. Here is exactly what each one means:
+
+* **Loyalty Program Type:** Can be "Single Tier Program" (everyone gets the same rewards) or "Multiple Tier Program" (rewards get better the more they spend).
+* **From Date / To Date:** Determines when the loyalty program is active. If `To Date` is left blank, the program runs forever.
+* **Customer Group:** Highly important! This restricts the program to only specific customers (e.g., `Loyalty Members`). Walk-in customers in other groups will NOT earn points, protecting your business from point hoarding.
+* **Customer Territory:** (Optional) Restricts the program to a specific geographical region. Usually left blank.
+* **Auto Opt In:** If checked, any customer belonging to the selected `Customer Group` will automatically start earning points on their first purchase without needing manual enrollment.
+* **Collection Rules (Tier Name, Min Spent, Collection Factor):**
+  * **Tier Name:** The name of the rank (e.g., Bronze, Silver, Gold). Customers automatically move up tiers based on their total lifetime spending.
+  * **Min Spent:** The minimum amount a customer must spend overall to reach this tier.
+  * **Collection Factor:** Determines how many AFN they must spend to earn exactly 1 Loyalty Point. For example, a factor of `100.0` means spending 100 AFN earns 1 Point. Better tiers (like Gold) have a lower collection factor (e.g., `25.0`), meaning they earn points 4x faster!
+* **Conversion Factor:** This dictates the actual cash value of 1 point when the customer redeems them. A conversion factor of `1.0` means 1 Point = 1 AFN discount at checkout. This remains the same across all tiers.
+* **Expiry Duration (in days):** How long points last before they expire. Set to `365` so points vanish after a year to encourage repeat visits. Leave blank or `0` if points never expire.
+* **Expense Account:** Set to `Loyalty Program Expense - JK`. When a customer redeems points for a discount, the system automatically subtracts that amount from your revenue and logs it into this expense account so your Profit & Loss statement is perfectly balanced.
+* **Company:** Links this program to `Jahan Kodak`.
+* **Cost Center / Project:** (Optional) Allows you to track the exact branch or project that is issuing the rewards for deeper financial analytics.
