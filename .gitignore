@@ -5,3 +5,6 @@
 tags
 node_modules
 __pycache__
+
+docs/Production_Deployment_Guide.md
+docs/Bench_Cheatsheet.md

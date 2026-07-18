@@ -49,34 +49,6 @@
   "to_range": 0.0
  },
  {
-  "attribute_name": "Gender",
-  "disabled": 0,
-  "docstatus": 0,
-  "doctype": "Item Attribute",
-  "from_range": 0.0,
-  "increment": 0.0,
-  "item_attribute_values": [
-   {
-    "abbr": "FM",
-    "attribute_value": "Femal",
-    "parent": "Gender",
-    "parentfield": "item_attribute_values",
-    "parenttype": "Item Attribute"
-   },
-   {
-    "abbr": "ML",
-    "attribute_value": "Male",
-    "parent": "Gender",
-    "parentfield": "item_attribute_values",
-    "parenttype": "Item Attribute"
-   }
-  ],
-  "modified": "2026-07-04 14:55:37.160828",
-  "name": "Gender",
-  "numeric_values": 0,
-  "to_range": 0.0
- },
- {
   "attribute_name": "Size",
   "disabled": 0,
   "docstatus": 0,
@@ -122,55 +94,6 @@
   ],
   "modified": "2026-06-08 00:19:16.493038",
   "name": "Size",
-  "numeric_values": 0,
-  "to_range": 0.0
- },
- {
-  "attribute_name": "Colour",
-  "disabled": 0,
-  "docstatus": 0,
-  "doctype": "Item Attribute",
-  "from_range": 0.0,
-  "increment": 0.0,
-  "item_attribute_values": [
-   {
-    "abbr": "RED",
-    "attribute_value": "Red",
-    "parent": "Colour",
-    "parentfield": "item_attribute_values",
-    "parenttype": "Item Attribute"
-   },
-   {
-    "abbr": "GRE",
-    "attribute_value": "Green",
-    "parent": "Colour",
-    "parentfield": "item_attribute_values",
-    "parenttype": "Item Attribute"
-   },
-   {
-    "abbr": "BLU",
-    "attribute_value": "Blue",
-    "parent": "Colour",
-    "parentfield": "item_attribute_values",
-    "parenttype": "Item Attribute"
-   },
-   {
-    "abbr": "BLA",
-    "attribute_value": "Black",
-    "parent": "Colour",
-    "parentfield": "item_attribute_values",
-    "parenttype": "Item Attribute"
-   },
-   {
-    "abbr": "WHI",
-    "attribute_value": "White",
-    "parent": "Colour",
-    "parentfield": "item_attribute_values",
-    "parenttype": "Item Attribute"
-   }
-  ],
-  "modified": "2026-06-08 00:19:16.510441",
-  "name": "Colour",
   "numeric_values": 0,
   "to_range": 0.0
  },
@@ -241,6 +164,83 @@
   ],
   "modified": "2026-07-04 14:56:53.780959",
   "name": "Persone category",
+  "numeric_values": 0,
+  "to_range": 0.0
+ },
+ {
+  "attribute_name": "Gender",
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Item Attribute",
+  "from_range": 0.0,
+  "increment": 0.0,
+  "item_attribute_values": [
+   {
+    "abbr": "FM",
+    "attribute_value": "Femal",
+    "parent": "Gender",
+    "parentfield": "item_attribute_values",
+    "parenttype": "Item Attribute"
+   },
+   {
+    "abbr": "ML",
+    "attribute_value": "Male",
+    "parent": "Gender",
+    "parentfield": "item_attribute_values",
+    "parenttype": "Item Attribute"
+   }
+  ],
+  "modified": "2026-07-04 14:55:37.160828",
+  "name": "Gender",
+  "numeric_values": 0,
+  "to_range": 0.0
+ },
+ {
+  "attribute_name": "Colour",
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Item Attribute",
+  "from_range": 0.0,
+  "increment": 0.0,
+  "item_attribute_values": [
+   {
+    "abbr": "RED",
+    "attribute_value": "Red",
+    "parent": "Colour",
+    "parentfield": "item_attribute_values",
+    "parenttype": "Item Attribute"
+   },
+   {
+    "abbr": "GRE",
+    "attribute_value": "Green",
+    "parent": "Colour",
+    "parentfield": "item_attribute_values",
+    "parenttype": "Item Attribute"
+   },
+   {
+    "abbr": "BLU",
+    "attribute_value": "Blue",
+    "parent": "Colour",
+    "parentfield": "item_attribute_values",
+    "parenttype": "Item Attribute"
+   },
+   {
+    "abbr": "BLA",
+    "attribute_value": "Black",
+    "parent": "Colour",
+    "parentfield": "item_attribute_values",
+    "parenttype": "Item Attribute"
+   },
+   {
+    "abbr": "WHI",
+    "attribute_value": "White",
+    "parent": "Colour",
+    "parentfield": "item_attribute_values",
+    "parenttype": "Item Attribute"
+   }
+  ],
+  "modified": "2026-06-08 00:19:16.510441",
+  "name": "Colour",
   "numeric_values": 0,
   "to_range": 0.0
  }

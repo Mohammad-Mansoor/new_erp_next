@@ -653,7 +653,7 @@ During the analysis of the Scope Document (Doc 1) and JK-Workflow PDF (Doc 2), t
 ---
 
 #### Task 5.2: Production Work Order Flow
-**Status:** ⬜ Not Started
+**Status:** 🟩 Completed
 **Purpose:** Execute production.
 **Business Requirement Reference:** Scope 5
 **Workflow Reference:** None
@@ -698,8 +698,8 @@ During the analysis of the Scope Document (Doc 1) and JK-Workflow PDF (Doc 2), t
 **Regression Test Requirements:**
 
 ##### Subtasks
-- [ ] Test Work Order creation
-- [ ] Validate final item cost
+- [x] Test Work Order creation
+- [x] Validate final item cost
 
 ##### GitHub Workflow & Deployment
 - **Git Branch Name:** `feat/TASK-5-2`
@@ -720,7 +720,7 @@ During the analysis of the Scope Document (Doc 1) and JK-Workflow PDF (Doc 2), t
 **Deployment Strategy:** Fixtures
 
 #### Task 6.1: POS Profiles and Multi-Payment
-**Status:** ⬜ Not Started
+**Status:** 🟩 Completed (UI Configuration)
 **Purpose:** Setup POS for branches with Cash/Bank/Mobile Money.
 **Business Requirement Reference:** Scope 1.4
 **Workflow Reference:** Workflow 4
@@ -765,8 +765,8 @@ During the analysis of the Scope Document (Doc 1) and JK-Workflow PDF (Doc 2), t
 **Regression Test Requirements:**
 
 ##### Subtasks
-- [ ] Create POS Profiles
-- [ ] Configure Payment Methods
+- [x] Create POS Profiles
+- [x] Configure Payment Methods
 
 ##### GitHub Workflow & Deployment
 - **Git Branch Name:** `feat/TASK-6-1`
@@ -776,7 +776,7 @@ During the analysis of the Scope Document (Doc 1) and JK-Workflow PDF (Doc 2), t
 ---
 
 #### Task 6.2: Customer Return Approval Workflow
-**Status:** ⬜ Not Started
+**Status:** 🟩 Completed (UI Configuration)
 **Purpose:** Refund requires approval.
 **Business Requirement Reference:** Scope 6
 **Workflow Reference:** Workflow 5
@@ -821,8 +821,8 @@ During the analysis of the Scope Document (Doc 1) and JK-Workflow PDF (Doc 2), t
 **Regression Test Requirements:**
 
 ##### Subtasks
-- [ ] Configure Sales Invoice Return Workflow
-- [ ] Test stock impact on approval
+- [x] Configure Sales Invoice Return Workflow
+- [x] Test stock impact on approval
 
 ##### GitHub Workflow & Deployment
 - **Git Branch Name:** `feat/TASK-6-2`
