@@ -377,3 +377,30 @@ When you open the **Loyalty Program** (`Jahan Kodak Rewards`), you will see the 
 * **Expense Account:** Set to `Loyalty Program Expense - JK`. When a customer redeems points for a discount, the system automatically subtracts that amount from your revenue and logs it into this expense account so your Profit & Loss statement is perfectly balanced.
 * **Company:** Links this program to `Jahan Kodak`.
 * **Cost Center / Project:** (Leave this BLANK!). ERPNext is incredibly smart: when a customer redeems points at the Mazar branch, the POS automatically forces the Loyalty Expense to hit the `Mazar Center - JK` cost center. If they redeem at Herat, it hits `Herat Center - JK`. By leaving this field blank on the Loyalty Program, you allow the system to dynamically track exactly which branch is costing you loyalty points in your Profit & Loss reports automatically!
+
+---
+
+## Phase 8: Financial Management
+
+### 1. Purchase Invoice Finance Approval Workflow
+**How it works:**
+All Purchase Invoices (supplier bills) go through a mandatory finance review before posting liabilities:
+1. **Accounts User** creates a new `Purchase Invoice` and clicks **Actions -> Submit for Finance Review**.
+2. Document enters `Pending Finance Review` state. General Ledger entries are **NOT** posted yet.
+3. **Finance Manager** reviews the invoice details and invoice items:
+   - Click **Approve Purchase Invoice** to finalize. Status changes to `Finance Manager Approved`, docstatus becomes Submitted (1), and GL ledger entries are posted.
+   - Or click **Reject** to send it back to `Rejected` state for the Accounts User to correct.
+
+**Important things to keep in mind:**
+- Prevents unapproved supplier payments or improper expenses from touching company ledgers without explicit approval.
+
+### 2. Daily Branch Closing & Stock Verification
+**How to do it from the UI:**
+1. At shift end, Branch Cashier/Manager performs a **Stock Reconciliation** for physical stock count.
+2. Open **POS Closing Entry** for the shift.
+3. Fill out the mandatory field **Stock Reconciliation** by selecting the submitted Stock Reconciliation record.
+4. Click **Actions -> Submit for Branch Approval**.
+5. **Branch Manager** verifies cash counts and stock reconciliation, then clicks **Approve POS Closing**.
+
+**Important things to keep in mind:**
+- The system will block shift closing if no Stock Reconciliation is attached or if the attached Stock Reconciliation is still in Draft state.

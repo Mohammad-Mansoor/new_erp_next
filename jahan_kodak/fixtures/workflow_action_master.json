@@ -54,5 +54,33 @@
   "modified": "2026-07-04 15:54:33.239957",
   "name": "Procurement Approve",
   "workflow_action_name": "Procurement Approve"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-07-21 20:22:53.561297",
+  "name": "Submit for Finance Review",
+  "workflow_action_name": "Submit for Finance Review"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-07-21 20:22:53.571460",
+  "name": "Approve Purchase Invoice",
+  "workflow_action_name": "Approve Purchase Invoice"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-07-21 20:22:53.573839",
+  "name": "Submit for Branch Approval",
+  "workflow_action_name": "Submit for Branch Approval"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-07-21 20:22:53.575905",
+  "name": "Approve POS Closing",
+  "workflow_action_name": "Approve POS Closing"
  }
 ]

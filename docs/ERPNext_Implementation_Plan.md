@@ -910,7 +910,7 @@ During the analysis of the Scope Document (Doc 1) and JK-Workflow PDF (Doc 2), t
 **Deployment Strategy:** Fixtures
 
 #### Task 8.1: Implement Chart of Accounts
-**Status:** ⬜ Not Started
+**Status:** ✅ Completed
 **Purpose:** Map to Afghan retail requirements.
 **Business Requirement Reference:** Scope Accounting
 **Workflow Reference:** Workflow 6
@@ -955,7 +955,7 @@ During the analysis of the Scope Document (Doc 1) and JK-Workflow PDF (Doc 2), t
 **Regression Test Requirements:**
 
 ##### Subtasks
-- [ ] Create Accounts
+- [x] Create Accounts
 
 ##### GitHub Workflow & Deployment
 - **Git Branch Name:** `feat/TASK-8-1`
@@ -965,7 +965,7 @@ During the analysis of the Scope Document (Doc 1) and JK-Workflow PDF (Doc 2), t
 ---
 
 #### Task 8.2: Purchase Invoice Finance Approval Workflow
-**Status:** ⬜ Not Started
+**Status:** ✅ Completed
 **Purpose:** Finance Manager must approve PI before payment.
 **Business Requirement Reference:** Scope Accounting
 **Workflow Reference:** Workflow General Approvals
@@ -1010,8 +1010,8 @@ During the analysis of the Scope Document (Doc 1) and JK-Workflow PDF (Doc 2), t
 **Regression Test Requirements:**
 
 ##### Subtasks
-- [ ] Define Workflow
-- [ ] Assign Roles
+- [x] Define Workflow
+- [x] Assign Roles
 
 ##### GitHub Workflow & Deployment
 - **Git Branch Name:** `feat/TASK-8-2`
@@ -1021,7 +1021,7 @@ During the analysis of the Scope Document (Doc 1) and JK-Workflow PDF (Doc 2), t
 ---
 
 #### Task 8.3: Daily Branch Closing with Stock Verification
-**Status:** ⬜ Not Started
+**Status:** ✅ Completed
 **Purpose:** Reconcile daily branch POS and Stock.
 **Business Requirement Reference:** Scope Accounting
 **Workflow Reference:** Workflow 8
@@ -1067,9 +1067,9 @@ During the analysis of the Scope Document (Doc 1) and JK-Workflow PDF (Doc 2), t
 **Regression Test Requirements:**
 
 ##### Subtasks
-- [ ] Add Stock Recon link field to POS Closing
-- [ ] Add Validation Script
-- [ ] Add Workflow for Branch Manager Approval
+- [x] Add Stock Recon link field to POS Closing
+- [x] Add Validation Script
+- [x] Add Workflow for Branch Manager Approval
 
 ##### GitHub Workflow & Deployment
 - **Git Branch Name:** `feat/TASK-8-3`

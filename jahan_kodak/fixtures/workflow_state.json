@@ -79,5 +79,41 @@
   "name": "Procurement Approved",
   "style": "",
   "workflow_state_name": "Procurement Approved"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-07-21 20:22:53.524905",
+  "name": "Draft",
+  "style": "Inverse",
+  "workflow_state_name": "Draft"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-07-21 20:22:53.533759",
+  "name": "Pending Finance Review",
+  "style": "Warning",
+  "workflow_state_name": "Pending Finance Review"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-07-21 20:22:53.536185",
+  "name": "Finance Manager Approved",
+  "style": "Primary",
+  "workflow_state_name": "Finance Manager Approved"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-07-21 20:22:53.539304",
+  "name": "Pending Branch Manager Approval",
+  "style": "Warning",
+  "workflow_state_name": "Pending Branch Manager Approval"
  }
 ]
