@@ -115,5 +115,23 @@
   "name": "Pending Branch Manager Approval",
   "style": "Warning",
   "workflow_state_name": "Pending Branch Manager Approval"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-07-23 20:27:53.747444",
+  "name": "Pending HR Approval",
+  "style": "Warning",
+  "workflow_state_name": "Pending HR Approval"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-07-23 20:27:53.761913",
+  "name": "Pending Finance Approval",
+  "style": "Warning",
+  "workflow_state_name": "Pending Finance Approval"
  }
 ]

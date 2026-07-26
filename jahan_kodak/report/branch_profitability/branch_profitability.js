@@ -1,0 +1,32 @@
+frappe.query_reports["Branch Profitability"] = {
+	"filters": [
+		{
+			"fieldname": "company",
+			"label": __("Company"),
+			"fieldtype": "Link",
+			"options": "Company",
+			"default": frappe.defaults.get_user_default("Company") || "Jahan Kodak",
+			"reqd": 1
+		},
+		{
+			"fieldname": "from_date",
+			"label": __("From Date"),
+			"fieldtype": "Date",
+			"default": frappe.datetime.add_months(frappe.datetime.get_today(), -1),
+			"reqd": 1
+		},
+		{
+			"fieldname": "to_date",
+			"label": __("To Date"),
+			"fieldtype": "Date",
+			"default": frappe.datetime.get_today(),
+			"reqd": 1
+		},
+		{
+			"fieldname": "cost_center",
+			"label": __("Cost Center / Branch"),
+			"fieldtype": "Link",
+			"options": "Cost Center"
+		}
+	]
+};

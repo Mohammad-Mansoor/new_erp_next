@@ -82,5 +82,33 @@
   "modified": "2026-07-21 20:22:53.575905",
   "name": "Approve POS Closing",
   "workflow_action_name": "Approve POS Closing"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-07-23 20:27:53.800715",
+  "name": "Submit for HR Approval",
+  "workflow_action_name": "Submit for HR Approval"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-07-23 20:27:53.813542",
+  "name": "Approve HR Review",
+  "workflow_action_name": "Approve HR Review"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-07-23 20:27:53.816523",
+  "name": "Approve Payroll",
+  "workflow_action_name": "Approve Payroll"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-07-23 20:27:53.820785",
+  "name": "Reject Payroll",
+  "workflow_action_name": "Reject Payroll"
  }
 ]

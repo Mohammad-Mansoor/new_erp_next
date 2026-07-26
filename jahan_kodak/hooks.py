@@ -257,5 +257,9 @@ fixtures = [
     "Workflow",
     "Workflow State",
     "Workflow Action Master",
-    "Item Attribute"
+    "Item Attribute",
+    {"dt": "Number Card", "filters": [["module", "=", "Jahan Kodak"]]},
+    {"dt": "Dashboard Chart", "filters": [["module", "=", "Jahan Kodak"]]},
+    {"dt": "Dashboard", "filters": [["module", "=", "Jahan Kodak"]]},
+    {"dt": "Workspace", "filters": [["module", "=", "Jahan Kodak"]]}
 ]

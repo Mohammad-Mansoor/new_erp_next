@@ -843,7 +843,7 @@ During the analysis of the Scope Document (Doc 1) and JK-Workflow PDF (Doc 2), t
 **Deployment Strategy:** Fixtures
 
 #### Task 7.1: Configure Customer Loyalty
-**Status:** ⬜ Not Started
+**Status:** 🟩 Completed
 **Purpose:** Award points for purchases.
 **Business Requirement Reference:** Scope 7
 **Workflow Reference:** None
@@ -888,8 +888,8 @@ During the analysis of the Scope Document (Doc 1) and JK-Workflow PDF (Doc 2), t
 **Regression Test Requirements:**
 
 ##### Subtasks
-- [ ] Setup Loyalty Program
-- [ ] Setup Loyalty Expense Account
+- [x] Setup Loyalty Program
+- [x] Setup Loyalty Expense Account
 
 ##### GitHub Workflow & Deployment
 - **Git Branch Name:** `feat/TASK-7-1`
@@ -1090,7 +1090,7 @@ During the analysis of the Scope Document (Doc 1) and JK-Workflow PDF (Doc 2), t
 **Deployment Strategy:** None
 
 #### Task 9.1: Install and Configure HRMS
-**Status:** ⬜ Not Started
+**Status:** 🟩 Completed
 **Purpose:** Manage Employees and Attendance.
 **Business Requirement Reference:** Scope 8
 **Workflow Reference:** Workflow 7
@@ -1136,9 +1136,9 @@ During the analysis of the Scope Document (Doc 1) and JK-Workflow PDF (Doc 2), t
 **Regression Test Requirements:**
 
 ##### Subtasks
-- [ ] Install HRMS
-- [ ] Configure Leave
-- [ ] Configure Shifts
+- [x] Install HRMS
+- [x] Configure Leave
+- [x] Configure Shifts
 
 ##### GitHub Workflow & Deployment
 - **Git Branch Name:** `feat/TASK-9-1`
@@ -1148,7 +1148,7 @@ During the analysis of the Scope Document (Doc 1) and JK-Workflow PDF (Doc 2), t
 ---
 
 #### Task 9.2: Payroll Processing & Approval Workflow
-**Status:** ⬜ Not Started
+**Status:** 🟩 Completed
 **Purpose:** Process salary with HR and Finance approvals.
 **Business Requirement Reference:** Scope 8
 **Workflow Reference:** Workflow General Approvals
@@ -1193,8 +1193,8 @@ During the analysis of the Scope Document (Doc 1) and JK-Workflow PDF (Doc 2), t
 **Regression Test Requirements:**
 
 ##### Subtasks
-- [ ] Setup Salary Components
-- [ ] Create Workflow
+- [x] Setup Salary Components
+- [x] Create Workflow
 
 ##### GitHub Workflow & Deployment
 - **Git Branch Name:** `feat/TASK-9-2`
@@ -1215,7 +1215,7 @@ During the analysis of the Scope Document (Doc 1) and JK-Workflow PDF (Doc 2), t
 **Deployment Strategy:** Python/JS files
 
 #### Task 10.1: Develop Management Reports
-**Status:** ⬜ Not Started
+**Status:** 🟩 Completed
 **Purpose:** Provide required visibility.
 **Business Requirement Reference:** Scope 9
 **Workflow Reference:** Workflow 9
@@ -1260,9 +1260,9 @@ During the analysis of the Scope Document (Doc 1) and JK-Workflow PDF (Doc 2), t
 **Regression Test Requirements:**
 
 ##### Subtasks
-- [ ] Develop Branch Profitability
-- [ ] Develop Employee Performance
-- [ ] Develop Top Selling/Slow Moving
+- [x] Develop Branch Profitability
+- [x] Develop Employee Performance
+- [x] Develop Top Selling/Slow Moving
 
 ##### GitHub Workflow & Deployment
 - **Git Branch Name:** `feat/TASK-10-1`
