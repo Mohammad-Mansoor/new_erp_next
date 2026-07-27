@@ -31,13 +31,15 @@ function isTextInput(elem) {
 
 $(document).on("keydown", function (e) {
 	const isSpaceKey = e.key === " " || e.keyCode === 32;
-	
-	// Alt + Space: ALWAYS triggers globally (no matter where cursor is)
-	// Standalone Space: triggers when not typing in text search box
+	const isF2Key = e.key === "F2" || e.keyCode === 113;
+	const isF9Key = e.key === "F9" || e.keyCode === 120;
+
+	// Shift + Space (100% OS safe on Ubuntu & Windows)
+	const isShiftSpace = e.shiftKey && isSpaceKey;
 	const isAltSpace = e.altKey && isSpaceKey;
 	const isStandaloneSpace = isSpaceKey && !e.altKey && !e.ctrlKey && !e.shiftKey && !isTextInput(document.activeElement);
 
-	if (isAltSpace || isStandaloneSpace) {
+	if (isShiftSpace || isAltSpace || isStandaloneSpace || isF2Key || isF9Key) {
 		const checkoutBtn = $(".checkout-btn:visible");
 		const submitOrderBtn = $(".submit-order-btn:visible");
 
