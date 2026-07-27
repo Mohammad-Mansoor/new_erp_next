@@ -1,57 +1,38 @@
 frappe.provide("jahan_kodak.pos");
 
-$(document).ready(function () {
-	// Register Frappe native keyboard shortcut for Spacebar
-	frappe.ui.keys.add_shortcut({
-		shortcut: "space",
-		description: __("POS Checkout / Complete Order"),
-		ignore_inputs: true,
-		condition: () => {
+$(document).on("keydown", function (e) {
+	// Check if key pressed is Spacebar (key: ' ', keyCode: 32)
+	if (e.key === " " || e.keyCode === 32) {
+		const activeElem = document.activeElement;
+		const isTyping =
+			activeElem &&
+			(activeElem.tagName === "INPUT" ||
+				activeElem.tagName === "TEXTAREA" ||
+				activeElem.tagName === "SELECT" ||
+				activeElem.isContentEditable);
+
+		// Trigger shortcut ONLY if user is NOT writing/typing in an input field
+		if (!isTyping) {
 			const checkoutBtn = $(".checkout-btn:visible");
 			const submitOrderBtn = $(".submit-order-btn:visible");
-
-			// Only run if either Checkout or Complete Order button is visible in POS
-			if (!checkoutBtn.length && !submitOrderBtn.length) {
-				return false;
-			}
-
-			const $focused = $(document.activeElement);
-			// If user is inside an input/textarea, only trigger if input is empty
-			if ($focused.is("input, select, textarea, [contenteditable=true]")) {
-				const val = $focused.val();
-				if (val && val.trim().length > 0) {
-					return false; // User is typing text, do not trigger shortcut
-				}
-			}
-
-			return true;
-		},
-		action: (e) => {
-			const checkoutBtn = $(".checkout-btn:visible");
-			const submitOrderBtn = $(".submit-order-btn:visible");
-
-			if (submitOrderBtn.length) {
-				submitOrderBtn.click();
-				return true;
-			}
 
 			if (checkoutBtn.length) {
+				e.preventDefault();
 				checkoutBtn.click();
-				return true;
+			} else if (submitOrderBtn.length) {
+				e.preventDefault();
+				submitOrderBtn.click();
 			}
-		},
-	});
+		}
+	}
 });
 
 // Remove automatic focus on cash input when Checkout is clicked
 $(document).on("click", ".checkout-btn", function () {
-	const removeFocus = function () {
+	setTimeout(function () {
 		if (document.activeElement) {
 			document.activeElement.blur();
 		}
-		$(".mode-of-payment-control input, .payment-modes input, .fields-numpad-container input").blur();
-	};
-
-	setTimeout(removeFocus, 100);
-	setTimeout(removeFocus, 300);
+		$(".mode-of-payment-control input").blur();
+	}, 250);
 });
