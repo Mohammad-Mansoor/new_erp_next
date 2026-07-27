@@ -26,7 +26,7 @@ app_license = "mit"
 
 # include js, css files in header of desk.html
 # app_include_css = "/assets/jahan_kodak/css/jahan_kodak.css"
-# app_include_js = "/assets/jahan_kodak/js/jahan_kodak.js"
+app_include_js = "/assets/jahan_kodak/js/pos_shortcuts.js"
 
 # include js, css files in header of web template
 # web_include_css = "/assets/jahan_kodak/css/jahan_kodak.css"
