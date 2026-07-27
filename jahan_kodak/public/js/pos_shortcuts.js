@@ -1,50 +1,57 @@
 frappe.provide("jahan_kodak.pos");
 
-document.addEventListener("keydown", function (e) {
-	// Check if key pressed is Spacebar (key: ' ', keyCode: 32)
-	if (e.key === " " || e.keyCode === 32) {
-		const checkoutBtn = $(".checkout-btn:visible");
-		const submitOrderBtn = $(".submit-order-btn:visible");
+$(document).ready(function () {
+	// Register Frappe native keyboard shortcut for Spacebar
+	frappe.ui.keys.add_shortcut({
+		shortcut: "space",
+		description: __("POS Checkout / Complete Order"),
+		ignore_inputs: true,
+		condition: () => {
+			const checkoutBtn = $(".checkout-btn:visible");
+			const submitOrderBtn = $(".submit-order-btn:visible");
 
-		// 1. Payment View: Pressing Space submits & completes order
-		if (submitOrderBtn.length) {
-			e.preventDefault();
-			e.stopPropagation();
-			submitOrderBtn.click();
-			return;
-		}
+			// Only run if either Checkout or Complete Order button is visible in POS
+			if (!checkoutBtn.length && !submitOrderBtn.length) {
+				return false;
+			}
 
-		// 2. Cart View: Pressing Space triggers Checkout if not typing text
-		if (checkoutBtn.length) {
-			const activeElem = document.activeElement;
-			let isActivelyTyping = false;
-
-			if (activeElem && (activeElem.tagName === "INPUT" || activeElem.tagName === "TEXTAREA")) {
-				// If the input has text typed by user, allow typing space
-				if (activeElem.value && activeElem.value.trim().length > 0) {
-					isActivelyTyping = true;
+			const $focused = $(document.activeElement);
+			// If user is inside an input/textarea, only trigger if input is empty
+			if ($focused.is("input, select, textarea, [contenteditable=true]")) {
+				const val = $focused.val();
+				if (val && val.trim().length > 0) {
+					return false; // User is typing text, do not trigger shortcut
 				}
 			}
 
-			// If search box is empty or no text is being typed, proceed to Checkout
-			if (!isActivelyTyping) {
-				e.preventDefault();
-				e.stopPropagation();
-				checkoutBtn.click();
+			return true;
+		},
+		action: (e) => {
+			const checkoutBtn = $(".checkout-btn:visible");
+			const submitOrderBtn = $(".submit-order-btn:visible");
+
+			if (submitOrderBtn.length) {
+				submitOrderBtn.click();
+				return true;
 			}
-		}
-	}
-}, true); // Event capture phase
+
+			if (checkoutBtn.length) {
+				checkoutBtn.click();
+				return true;
+			}
+		},
+	});
+});
 
 // Remove automatic focus on cash input when Checkout is clicked
 $(document).on("click", ".checkout-btn", function () {
-	const blurInputs = function () {
+	const removeFocus = function () {
 		if (document.activeElement) {
 			document.activeElement.blur();
 		}
 		$(".mode-of-payment-control input, .payment-modes input, .fields-numpad-container input").blur();
 	};
 
-	setTimeout(blurInputs, 100);
-	setTimeout(blurInputs, 350);
+	setTimeout(removeFocus, 100);
+	setTimeout(removeFocus, 300);
 });
