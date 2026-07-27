@@ -66,7 +66,7 @@
   "docstatus": 0,
   "doctype": "Dashboard",
   "is_default": 0,
-  "is_standard": 0,
+  "is_standard": 1,
   "modified": "2026-07-24 16:18:09.756662",
   "module": "Jahan Kodak",
   "name": "Jahan Kodak Executive Dashboard"
