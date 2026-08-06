@@ -46,14 +46,13 @@ frappe.provide("jahan_kodak.pos");
 				return;
 			}
 
-			frappe.dom.freeze(__("Fetching Invoice for Return..."));
+			frappe.dom.freeze(__("Checking Invoice for Return..."));
 
 			frappe.db
 				.get_doc("POS Invoice", invoiceId)
 				.then((doc) => {
-					frappe.dom.unfreeze();
-
 					if (!doc || !doc.name) {
+						frappe.dom.unfreeze();
 						frappe.msgprint({
 							title: __("Invoice Not Found"),
 							indicator: "red",
@@ -63,6 +62,7 @@ frappe.provide("jahan_kodak.pos");
 					}
 
 					if (doc.docstatus !== 1) {
+						frappe.dom.unfreeze();
 						frappe.msgprint({
 							title: __("Cannot Return Invoice"),
 							indicator: "orange",
@@ -72,26 +72,49 @@ frappe.provide("jahan_kodak.pos");
 					}
 
 					if (doc.is_return) {
+						frappe.dom.unfreeze();
 						frappe.msgprint({
-							title: __("Already a Return"),
+							title: __("Already a Return Document"),
 							indicator: "orange",
 							message: __("Invoice <b>{0}</b> is already a return document.", [frappe.utils.escape_html(invoiceId)]),
 						});
 						return;
 					}
 
-					// Execute POS Return Flow
-					frappe.run_serially([
-						() => window.cur_pos.make_return_invoice(doc),
-						() => window.cur_pos.cart.load_invoice(),
-						() => window.cur_pos.item_selector.toggle_component(true),
-					]);
+					// Check if a return invoice has ALREADY been created against this original invoice
+					frappe.db
+						.get_value("POS Invoice", { return_against: doc.name, docstatus: 1 }, "name")
+						.then((r) => {
+							frappe.dom.unfreeze();
 
-					$("#pos-quick-return-input").val("");
-					frappe.show_alert({
-						message: __("Loaded return for Receipt <b>{0}</b>. Click Checkout to complete.", [frappe.utils.escape_html(invoiceId)]),
-						indicator: "green",
-					});
+							if (r && r.message && r.message.name) {
+								frappe.msgprint({
+									title: __("Already Returned"),
+									indicator: "orange",
+									message: __("Invoice <b>{0}</b> has already been returned via Return Invoice <b>{1}</b>.", [
+										frappe.utils.escape_html(doc.name),
+										frappe.utils.escape_html(r.message.name),
+									]),
+								});
+								return;
+							}
+
+							// Execute POS Return Flow
+							frappe.run_serially([
+								() => window.cur_pos.make_return_invoice(doc),
+								() => window.cur_pos.cart.load_invoice(),
+								() => window.cur_pos.item_selector.toggle_component(true),
+							]);
+
+							$("#pos-quick-return-input").val("");
+							frappe.show_alert({
+								message: __("Loaded return for Receipt <b>{0}</b>. Click Checkout to complete.", [frappe.utils.escape_html(invoiceId)]),
+								indicator: "green",
+							});
+						})
+						.catch(() => {
+							frappe.dom.unfreeze();
+						});
 				})
 				.catch((err) => {
 					frappe.dom.unfreeze();
