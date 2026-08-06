@@ -24,20 +24,7 @@ app_license = "mit"
 # Includes in <head>
 # ------------------
 
-# include js, css files in header of desk.html
-# app_include_css = "/assets/jahan_kodak/css/jahan_kodak.css"
-# app_include_js = "/assets/jahan_kodak/js/jahan_kodak.js"
-
-# include js, css files in header of web template
-# web_include_css = "/assets/jahan_kodak/css/jahan_kodak.css"
-# web_include_js = "/assets/jahan_kodak/js/jahan_kodak.js"
-
-# include custom scss in every website theme (without file extension ".scss")
-# website_theme_scss = "jahan_kodak/public/scss/website"
-
-# include js, css files in header of web form
-# webform_include_js = {"doctype": "public/js/doctype.js"}
-# webform_include_css = {"doctype": "public/css/doctype.css"}
+app_include_js = "public/js/pos_quick_return.js"
 
 page_js = {
     "point-of-sale": "public/js/pos_quick_return.js"
