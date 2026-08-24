@@ -280,5 +280,25 @@ def create_workspace():
 	doc.append("number_cards", {"number_card_name": "JK Active Employees", "label": "Active Employees"})
 	doc.append("number_cards", {"number_card_name": "JK Pending Material Requests", "label": "Pending Stock Transfers"})
 
+	content_blocks = [
+		{"id":"jk_num_head","type":"header","data":{"text":"<span class=\"h4\"><b>Key Metrics &amp; Performance</b></span>","col":12}},
+		{"id":"jk_nc_1","type":"number_card","data":{"number_card_name":"JK Monthly POS Sales","col":4}},
+		{"id":"jk_nc_2","type":"number_card","data":{"number_card_name":"JK Total Inventory Value","col":4}},
+		{"id":"jk_nc_3","type":"number_card","data":{"number_card_name":"JK Active Employees","col":4}},
+		{"id":"jk_nc_4","type":"number_card","data":{"number_card_name":"JK Pending Material Requests","col":4}},
+		{"id":"jk_sc_head","type":"header","data":{"text":"<span class=\"h4\"><b>Shortcuts</b></span>","col":12}},
+		{"id":"jk_sc_1","type":"shortcut","data":{"shortcut_name":"Branch Profitability Report","col":3}},
+		{"id":"jk_sc_2","type":"shortcut","data":{"shortcut_name":"Employee Performance Report","col":3}},
+		{"id":"jk_sc_3","type":"shortcut","data":{"shortcut_name":"POS Invoices","col":3}},
+		{"id":"jk_sc_4","type":"shortcut","data":{"shortcut_name":"Stock Movements","col":3}},
+		{"id":"jk_ch_head","type":"header","data":{"text":"<span class=\"h4\"><b>Analytics Charts</b></span>","col":12}},
+		{"id":"jk_ch_1","type":"chart","data":{"chart_name":"JK Branch Sales Distribution","col":6}},
+		{"id":"jk_ch_2","type":"chart","data":{"chart_name":"JK Stock Valuation By Warehouse","col":6}},
+		{"id":"jk_cards_head","type":"header","data":{"text":"<span class=\"h4\"><b>Reports &amp; Operations</b></span>","col":12}},
+		{"id":"jk_card_1","type":"card","data":{"card_name":"Key Custom Reports","col":6}},
+		{"id":"jk_card_2","type":"card","data":{"card_name":"Core Operations","col":6}}
+	]
+	doc.content = json.dumps(content_blocks)
+
 	doc.save(ignore_permissions=True)
 	print(f"Workspace '{workspace_name}' saved.")

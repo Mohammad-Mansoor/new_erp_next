@@ -102,15 +102,6 @@
   "docstatus": 0,
   "doctype": "Workflow State",
   "icon": "",
-  "modified": "2026-07-21 20:22:53.539304",
-  "name": "Pending Branch Manager Approval",
-  "style": "Warning",
-  "workflow_state_name": "Pending Branch Manager Approval"
- },
- {
-  "docstatus": 0,
-  "doctype": "Workflow State",
-  "icon": "",
   "modified": "2026-07-23 20:27:53.747444",
   "name": "Pending HR Approval",
   "style": "Warning",
@@ -133,5 +124,14 @@
   "name": "Branch Manager Approved",
   "style": "",
   "workflow_state_name": "Branch Manager Approved"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-07-21 20:22:53.539304",
+  "name": "Pending Branch Manager Approval",
+  "style": "Warning",
+  "workflow_state_name": "Pending Branch Manager Approval"
  }
 ]

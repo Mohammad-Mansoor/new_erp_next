@@ -1,8 +1,20 @@
 frappe.provide("jahan_kodak.pos");
 
 (function() {
+	function getRouteStr() {
+		if (typeof frappe === "undefined" || !frappe || !frappe.router || !frappe.router.current_route || typeof frappe.get_route_str !== "function") {
+			return "";
+		}
+		try {
+			return frappe.get_route_str() || "";
+		} catch (e) {
+			return "";
+		}
+	}
+
 	function renderQuickReturn() {
-		const route = frappe.get_route_str();
+		if (typeof $ === "undefined") return;
+		const route = getRouteStr();
 		if (route !== "point-of-sale" && !window.location.hash.includes("point-of-sale")) {
 			return;
 		}
@@ -152,7 +164,8 @@ frappe.provide("jahan_kodak.pos");
 		erpnext.PointOfSale.Payment.prototype.update_totals_section = function (doc) {
 			if (!doc) doc = this.events.get_frm().doc;
 			const paid_amount = doc.paid_amount || 0;
-			const grand_total = cint(frappe.sys_defaults.disable_rounded_total)
+			const disable_rounded = (typeof frappe !== "undefined" && frappe.sys_defaults) ? frappe.sys_defaults.disable_rounded_total : 0;
+			const grand_total = cint(disable_rounded)
 				? doc.grand_total
 				: doc.rounded_total;
 			const remaining = grand_total - paid_amount;
@@ -164,7 +177,7 @@ frappe.provide("jahan_kodak.pos");
 				return;
 			}
 
-			const precision = frappe.defaults.get_default("currency_precision") || 2;
+			const precision = (typeof frappe !== "undefined" && frappe.defaults) ? (frappe.defaults.get_default("currency_precision") || 2) : 2;
 			const rem_flt = flt(remaining, precision);
 
 			let value_style = "font-weight: 600;";
@@ -200,7 +213,8 @@ frappe.provide("jahan_kodak.pos");
 	}
 
 	function applyItemCardVisibilityToggle() {
-		const route = frappe.get_route_str();
+		if (typeof $ === "undefined") return;
+		const route = getRouteStr();
 		if (route !== "point-of-sale" && !window.location.hash.includes("point-of-sale")) {
 			return;
 		}
@@ -247,9 +261,11 @@ frappe.provide("jahan_kodak.pos");
 	setInterval(overridePosPaymentTotals, 1000);
 	setInterval(applyItemCardVisibilityToggle, 1000);
 
-	$(document).on("page-change route", function () {
-		setTimeout(renderQuickReturn, 500);
-		setTimeout(overridePosPaymentTotals, 500);
-		setTimeout(applyItemCardVisibilityToggle, 500);
-	});
+	if (typeof $ !== "undefined") {
+		$(document).on("page-change route", function () {
+			setTimeout(renderQuickReturn, 500);
+			setTimeout(overridePosPaymentTotals, 500);
+			setTimeout(applyItemCardVisibilityToggle, 500);
+		});
+	}
 })();

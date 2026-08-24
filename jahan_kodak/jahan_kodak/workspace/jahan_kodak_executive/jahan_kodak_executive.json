@@ -1,0 +1,182 @@
+{
+ "charts": [
+  {
+   "chart_name": "JK Branch Sales Distribution",
+   "label": "Branch Sales Distribution"
+  },
+  {
+   "chart_name": "JK Stock Valuation By Warehouse",
+   "label": "Stock Valuation By Warehouse"
+  }
+ ],
+ "content": "[{\"id\": \"jk_num_head\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Key Metrics &amp; Performance</b></span>\", \"col\": 12}}, {\"id\": \"jk_nc_1\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"JK Monthly POS Sales\", \"col\": 4}}, {\"id\": \"jk_nc_2\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"JK Total Inventory Value\", \"col\": 4}}, {\"id\": \"jk_nc_3\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"JK Active Employees\", \"col\": 4}}, {\"id\": \"jk_nc_4\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"JK Pending Material Requests\", \"col\": 4}}, {\"id\": \"jk_sc_head\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Shortcuts</b></span>\", \"col\": 12}}, {\"id\": \"jk_sc_1\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Branch Profitability Report\", \"col\": 3}}, {\"id\": \"jk_sc_2\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Employee Performance Report\", \"col\": 3}}, {\"id\": \"jk_sc_3\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"POS Invoices\", \"col\": 3}}, {\"id\": \"jk_sc_4\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Stock Movements\", \"col\": 3}}, {\"id\": \"jk_ch_head\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Analytics Charts</b></span>\", \"col\": 12}}, {\"id\": \"jk_ch_1\", \"type\": \"chart\", \"data\": {\"chart_name\": \"JK Branch Sales Distribution\", \"col\": 6}}, {\"id\": \"jk_ch_2\", \"type\": \"chart\", \"data\": {\"chart_name\": \"JK Stock Valuation By Warehouse\", \"col\": 6}}, {\"id\": \"jk_cards_head\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Reports &amp; Operations</b></span>\", \"col\": 12}}, {\"id\": \"jk_card_1\", \"type\": \"card\", \"data\": {\"card_name\": \"Key Custom Reports\", \"col\": 6}}, {\"id\": \"jk_card_2\", \"type\": \"card\", \"data\": {\"card_name\": \"Core Operations\", \"col\": 6}}]",
+ "creation": "2026-08-12 00:44:31.549939",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "hide_custom": 0,
+ "icon": "chart",
+ "idx": 0,
+ "indicator_color": "green",
+ "is_hidden": 0,
+ "label": "Jahan Kodak Executive",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Key Custom Reports",
+   "link_count": 0,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Branch Profitability",
+   "link_count": 0,
+   "link_to": "Branch Profitability",
+   "link_type": "Report",
+   "onboard": 0,
+   "report_ref_doctype": "GL Entry",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Employee Performance",
+   "link_count": 0,
+   "link_to": "Employee Performance",
+   "link_type": "Report",
+   "onboard": 0,
+   "report_ref_doctype": "Sales Invoice",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Top Selling & Slow Moving Items",
+   "link_count": 0,
+   "link_to": "Top Selling and Slow Moving Items",
+   "link_type": "Report",
+   "onboard": 0,
+   "report_ref_doctype": "Item",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Core Operations",
+   "link_count": 0,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Point of Sale (POS) Invoices",
+   "link_count": 0,
+   "link_to": "POS Invoice",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Material / Stock Requests",
+   "link_count": 0,
+   "link_to": "Material Request",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Staff Directory",
+   "link_count": 0,
+   "link_to": "Employee",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Monthly Payroll Processing",
+   "link_count": 0,
+   "link_to": "Payroll Entry",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2026-08-23 23:55:26.608535",
+ "modified_by": "Administrator",
+ "module": "Jahan Kodak",
+ "name": "Jahan Kodak Executive",
+ "number_cards": [
+  {
+   "label": "Monthly POS Sales",
+   "number_card_name": "JK Monthly POS Sales"
+  },
+  {
+   "label": "Total Stock Value",
+   "number_card_name": "JK Total Inventory Value"
+  },
+  {
+   "label": "Active Employees",
+   "number_card_name": "JK Active Employees"
+  },
+  {
+   "label": "Pending Stock Transfers",
+   "number_card_name": "JK Pending Material Requests"
+  }
+ ],
+ "owner": "Administrator",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 0.0,
+ "shortcuts": [
+  {
+   "label": "Branch Profitability Report",
+   "link_to": "Branch Profitability",
+   "report_ref_doctype": "GL Entry",
+   "type": "Report"
+  },
+  {
+   "label": "Employee Performance Report",
+   "link_to": "Employee Performance",
+   "report_ref_doctype": "Sales Invoice",
+   "type": "Report"
+  },
+  {
+   "label": "Top Selling & Slow Moving Items Report",
+   "link_to": "Top Selling and Slow Moving Items",
+   "report_ref_doctype": "Item",
+   "type": "Report"
+  },
+  {
+   "label": "POS Invoices",
+   "link_to": "POS Invoice",
+   "type": "DocType"
+  },
+  {
+   "label": "Sales Invoices",
+   "link_to": "Sales Invoice",
+   "type": "DocType"
+  },
+  {
+   "label": "Employees",
+   "link_to": "Employee",
+   "type": "DocType"
+  },
+  {
+   "label": "Stock Movements",
+   "link_to": "Stock Entry",
+   "type": "DocType"
+  }
+ ],
+ "title": "Jahan Kodak Executive"
+}

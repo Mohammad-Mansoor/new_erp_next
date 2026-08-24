@@ -24,7 +24,7 @@ app_license = "mit"
 # Includes in <head>
 # ------------------
 
-app_include_js = "public/js/pos_quick_return.js"
+app_include_js = "/assets/jahan_kodak/js/pos_quick_return.js"
 
 page_js = {
     "point-of-sale": "public/js/pos_quick_return.js"
@@ -63,11 +63,18 @@ doctype_js = {
 # Jinja
 # ----------
 
-# add methods and filters to jinja environment
-# jinja = {
-# 	"methods": "jahan_kodak.utils.jinja_methods",
-# 	"filters": "jahan_kodak.utils.jinja_filters"
-# }
+jinja = {
+	"methods": [
+		"jahan_kodak.item_utils.get_barcode_svg",
+		"jahan_kodak.item_utils.get_qr_code_base64"
+	]
+}
+
+doc_events = {
+	"Item": {
+		"before_insert": "jahan_kodak.item_utils.auto_generate_barcode"
+	}
+}
 
 # Installation
 # ------------
