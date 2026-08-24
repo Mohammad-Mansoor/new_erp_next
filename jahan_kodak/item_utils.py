@@ -116,6 +116,86 @@ def get_barcode_svg(text, height=80, bar_width=3, show_text=False):
 	return f'<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 {total_width} {view_height}" preserveAspectRatio="none">{svg_body}{text_element}</svg>'
 
 
+@frappe.whitelist()
+def get_bulk_barcode_html(receipt_name):
+	"""
+	Generates raw HTML for bulk printing barcode stickers based on a Purchase Receipt's items and quantities.
+	"""
+	if not receipt_name:
+		frappe.throw("Purchase Receipt name is required")
+
+	receipt = frappe.get_doc("Purchase Receipt", receipt_name)
+	
+	html_parts = []
+	html_parts.append('''<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Bulk Print Barcodes - ''' + receipt_name + '''</title>
+	<style>
+		@page { size: 50mm 35mm; margin: 0; }
+		html, body { margin: 0; padding: 0; background-color: #ffffff; color: #000000; font-family: Arial, sans-serif; }
+		.sticker {
+			width: 50mm;
+			height: 35mm;
+			box-sizing: border-box;
+			page-break-after: always;
+			overflow: hidden;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			padding: 1.5mm 1mm;
+			text-align: center;
+		}
+		.sticker:last-child {
+			page-break-after: auto;
+		}
+		.header { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+		.subheader { font-size: 10px; font-weight: 600; color: #333333; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+		.barcode-container { width: 46mm; height: 18mm; margin: 0 auto; }
+		.price { font-size: 12px; font-weight: 900; margin-top: 2px; }
+	</style>
+</head>
+<body onload="setTimeout(function(){ window.print(); }, 500);">''')
+
+	# Get items and their prices/barcodes
+	for item_row in receipt.items:
+		item_doc = frappe.get_doc("Item", item_row.item_code)
+		
+		# Get barcode
+		barcode_val = item_doc.item_code
+		if item_doc.get("barcodes"):
+			barcode_val = item_doc.barcodes[0].barcode
+		
+		# Get price
+		item_price = frappe.db.get_value("Item Price", {"item_code": item_doc.name, "selling": 1}, "price_list_rate")
+		if not item_price:
+			item_price = item_doc.standard_rate or item_doc.valuation_rate or 0
+		price_str = frappe.utils.fmt_money(item_price) if item_price else ""
+		
+		# Generate barcode SVG
+		barcode_svg = get_barcode_svg(barcode_val, height=80, bar_width=3, show_text=False)
+		
+		# Generate QTY times
+		qty = int(item_row.qty)
+		for _ in range(qty):
+			sticker_html = f'''
+		<div class="sticker">
+			<div>
+				<div class="header">{item_doc.item_code}</div>
+				<div class="subheader">{item_doc.item_name}</div>
+			</div>
+			<div class="barcode-container">
+				{barcode_svg}
+			</div>
+			<div class="price">Price: {price_str}</div>
+		</div>'''
+			html_parts.append(sticker_html)
+
+	html_parts.append('</body></html>')
+	return ''.join(html_parts)
+
+
 def get_qr_code_base64(text):
 	"""
 	Generates a 2D QR Code PNG Base64 data URI string for instant scanning with any iPhone / Smartphone Camera.

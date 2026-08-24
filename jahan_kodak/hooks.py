@@ -76,6 +76,10 @@ doc_events = {
 	}
 }
 
+doctype_js = {
+	"Purchase Receipt": "public/js/purchase_receipt_bulk_print.js"
+}
+
 # Installation
 # ------------
 
