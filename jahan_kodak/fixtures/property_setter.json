@@ -1,6 +1,22 @@
 [
  {
   "default_value": null,
+  "doc_type": "POS Exchange",
+  "docstatus": 0,
+  "doctype": "Property Setter",
+  "doctype_or_field": "DocField",
+  "field_name": "naming_series",
+  "is_system_generated": 1,
+  "modified": "2026-08-26 21:26:55.677266",
+  "module": null,
+  "name": "POS Exchange-naming_series-options",
+  "property": "options",
+  "property_type": "Text",
+  "row_name": null,
+  "value": "EXCHANGE-.YYYY.-"
+ },
+ {
+  "default_value": null,
   "doc_type": "Item Variant Attribute",
   "docstatus": 0,
   "doctype": "Property Setter",

@@ -111,16 +111,12 @@ frappe.provide("jahan_kodak.pos");
 								return;
 							}
 
-							// Execute POS Return Flow
-							frappe.run_serially([
-								() => window.cur_pos.make_return_invoice(doc),
-								() => window.cur_pos.cart.load_invoice(),
-								() => window.cur_pos.item_selector.toggle_component(true),
-							]);
+							// Launch POS Exchange UI
+							window.cur_pos_exchange = new jahan_kodak.POSExchangeUI({ original_invoice: doc });
 
 							$("#pos-quick-return-input").val("");
 							frappe.show_alert({
-								message: __("Loaded return for Receipt <b>{0}</b>. Click Checkout to complete.", [frappe.utils.escape_html(invoiceId)]),
+								message: __("Loaded POS Exchange for Receipt <b>{0}</b>", [frappe.utils.escape_html(invoiceId)]),
 								indicator: "green",
 							});
 						})

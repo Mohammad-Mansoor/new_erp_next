@@ -1,16 +1,17 @@
 import frappe
-from erpnext.controllers.item_variant import create_variant_doc_for_quick_entry
-import json
+from erpnext.selling.page.point_of_sale.point_of_sale import get_items
 
 def run():
-    frappe.flags.in_test = True
-    args = json.dumps({"Colour": "Red", "Size": "Extra Large"})
     try:
-        result = create_variant_doc_for_quick_entry("5207", args)
-        if isinstance(result, str):
-            print("API returned string:", result)
-        else:
-            print("API returned item_code:", result.get("item_code"))
+        res = get_items(
+            start=0,
+            page_length=1,
+            price_list="Standard Selling",
+            item_group="",
+            pos_profile="Default POS Profile",
+            search_term=""
+        )
+        print("SUCCESS")
     except Exception as e:
         import traceback
         traceback.print_exc()

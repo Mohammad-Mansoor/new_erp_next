@@ -27,7 +27,10 @@ app_license = "mit"
 app_include_js = "/assets/jahan_kodak/js/pos_quick_return.js"
 
 page_js = {
-    "point-of-sale": "public/js/pos_quick_return.js"
+    "point-of-sale": [
+        "public/js/pos_quick_return.js",
+        "public/js/pos_exchange_ui.js"
+    ]
 }
 
 # include js in doctype views

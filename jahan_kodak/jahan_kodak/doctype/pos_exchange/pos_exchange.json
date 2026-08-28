@@ -1,0 +1,168 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2026-08-26 12:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "idempotency_key",
+  "original_invoice",
+  "return_invoice",
+  "replacement_invoice",
+  "customer",
+  "company",
+  "pos_profile",
+  "status",
+  "sb_amounts",
+  "return_total",
+  "replacement_total",
+  "difference",
+  "sb_items",
+  "items",
+  "sb_payments",
+  "payments"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Naming Series",
+   "options": "EXCHANGE-.YYYY.-"
+  },
+  {
+   "fieldname": "idempotency_key",
+   "fieldtype": "Data",
+   "label": "Idempotency Key",
+   "unique": 1,
+   "hidden": 1
+  },
+  {
+   "fieldname": "original_invoice",
+   "fieldtype": "Link",
+   "label": "Original Invoice",
+   "options": "POS Invoice",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "return_invoice",
+   "fieldtype": "Link",
+   "label": "Return Invoice",
+   "options": "POS Invoice",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "replacement_invoice",
+   "fieldtype": "Link",
+   "label": "Replacement Invoice",
+   "options": "POS Invoice",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer",
+   "reqd": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "pos_profile",
+   "fieldtype": "Link",
+   "label": "POS Profile",
+   "options": "POS Profile",
+   "reqd": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Draft\nCompleted\nFailed",
+   "default": "Draft",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "sb_amounts",
+   "fieldtype": "Section Break",
+   "label": "Amounts"
+  },
+  {
+   "fieldname": "return_total",
+   "fieldtype": "Currency",
+   "label": "Return Total",
+   "read_only": 1
+  },
+  {
+   "fieldname": "replacement_total",
+   "fieldtype": "Currency",
+   "label": "Replacement Total",
+   "read_only": 1
+  },
+  {
+   "fieldname": "difference",
+   "fieldtype": "Currency",
+   "label": "Difference",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "sb_items",
+   "fieldtype": "Section Break",
+   "label": "Items"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "POS Exchange Item"
+  },
+  {
+   "fieldname": "sb_payments",
+   "fieldtype": "Section Break",
+   "label": "Settlement"
+  },
+  {
+   "fieldname": "payments",
+   "fieldtype": "Table",
+   "label": "Payments",
+   "options": "POS Exchange Payment"
+  }
+ ],
+ "is_submittable": 1,
+ "istable": 0,
+ "links": [],
+ "modified": "2026-08-26 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "jahan_kodak",
+ "name": "POS Exchange",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}
