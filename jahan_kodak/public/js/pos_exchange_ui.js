@@ -59,12 +59,12 @@ jahan_kodak.POSExchangeUI = class POSExchangeUI {
             <!-- Header -->
             <div class="exchange-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 15px;">
                 <div>
-                    <h3 style="margin: 0; color: var(--text-color);">POS EXCHANGE</h3>
+                    <h3 style="margin: 0; color: var(--text-color);">${__("POS EXCHANGE")}</h3>
                     <div style="color: var(--text-muted); margin-top: 5px;">
-                        <strong>Original Invoice:</strong> ${doc.name} | <strong>Customer:</strong> ${doc.customer}
+                        <strong>${__("Original Invoice:")}</strong> ${doc.name} | <strong>${__("Customer:")}</strong> ${doc.customer}
                     </div>
                 </div>
-                <button class="btn btn-default btn-cancel-exchange" style="font-weight: bold;">✕ Cancel</button>
+                <button class="btn btn-default btn-cancel-exchange" style="font-weight: bold;">${__("✕ Cancel")}</button>
             </div>
 
             <div class="row">
@@ -72,43 +72,43 @@ jahan_kodak.POSExchangeUI = class POSExchangeUI {
                 <div class="col-md-8">
                     <!-- Return Items -->
                     <div class="exchange-section return-items-section">
-                        <h4 style="margin-top: 0;">Return Items</h4>
+                        <h4 style="margin-top: 0;">${__("Return Items")}</h4>
                         <table class="table table-bordered">
                             <thead class="bg-light">
                                 <tr>
-                                    <th>Item</th>
-                                    <th class="text-right">Price</th>
-                                    <th class="text-right">Original Qty</th>
-                                    <th class="text-right">Already Returned</th>
-                                    <th class="text-right">Remaining</th>
-                                    <th class="text-center" style="width: 120px;">Return Qty</th>
-                                    <th class="text-right">Total Price</th>
+                                    <th>${__("Item")}</th>
+                                    <th class="text-right">${__("Price")}</th>
+                                    <th class="text-right">${__("Original Qty")}</th>
+                                    <th class="text-right">${__("Already Returned")}</th>
+                                    <th class="text-right">${__("Remaining")}</th>
+                                    <th class="text-center" style="width: 120px;">${__("Return Qty")}</th>
+                                    <th class="text-right">${__("Total Price")}</th>
                                 </tr>
                             </thead>
                             <tbody id="return-items-body">
-                                <tr><td colspan="7" class="text-center text-muted">Calculating returnable quantities...</td></tr>
+                                <tr><td colspan="7" class="text-center text-muted">${__("Calculating returnable quantities...")}</td></tr>
                             </tbody>
                         </table>
                     </div>
 
                     <!-- Replacement Items -->
                     <div class="exchange-section replacement-items-section mt-4">
-                        <h4>Replacement Items</h4>
+                        <h4>${__("Replacement Items")}</h4>
                         <div class="form-group">
-                            <input type="text" id="replacement-item-search" class="form-control" placeholder="📷 Scan barcode or search item..." style="border: 2px solid #3498db; font-size: 14px;">
+                            <input type="text" id="replacement-item-search" class="form-control" placeholder="${__('📷 Scan barcode or search item...')}" style="border: 2px solid #3498db; font-size: 14px;">
                         </div>
                         <table class="table table-bordered">
                             <thead class="bg-light">
                                 <tr>
-                                    <th>Item</th>
-                                    <th class="text-right" style="width: 100px;">Qty</th>
-                                    <th class="text-right">Price</th>
-                                    <th class="text-right">Total Price</th>
+                                    <th>${__("Item")}</th>
+                                    <th class="text-right" style="width: 100px;">${__("Qty")}</th>
+                                    <th class="text-right">${__("Price")}</th>
+                                    <th class="text-right">${__("Total Price")}</th>
                                     <th class="text-center" style="width: 50px;"></th>
                                 </tr>
                             </thead>
                             <tbody id="replacement-items-body">
-                                <tr><td colspan="5" class="text-center text-muted">No replacement items selected.</td></tr>
+                                <tr><td colspan="5" class="text-center text-muted">${__("No replacement items selected.")}</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -117,31 +117,31 @@ jahan_kodak.POSExchangeUI = class POSExchangeUI {
                 <!-- Right Column (Summary) -->
                 <div class="col-md-4">
                     <div class="exchange-summary-box p-4" style="background: var(--bg-light); border-radius: 8px; border: 1px solid var(--border-color);">
-                        <h4 style="margin-top: 0; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">Exchange Summary</h4>
+                        <h4 style="margin-top: 0; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">${__("Exchange Summary")}</h4>
                         
                         <div style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 15px;">
-                            <span>Returned Amount:</span>
+                            <span>${__("Returned Amount:")}</span>
                             <strong id="summary-returned-amount">0.00</strong>
                         </div>
                         <div style="display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 15px;">
-                            <span>Replacement Amount:</span>
+                            <span>${__("Replacement Amount:")}</span>
                             <strong id="summary-replacement-amount">0.00</strong>
                         </div>
                         
                         <hr>
                         
                         <div class="text-center mb-3">
-                            <div id="summary-settlement-label" style="font-size: 12px; font-weight: bold; color: var(--text-muted); text-transform: uppercase;">NO PAYMENT REQUIRED</div>
+                            <div id="summary-settlement-label" style="font-size: 12px; font-weight: bold; color: var(--text-muted); text-transform: uppercase;">${__("NO PAYMENT REQUIRED")}</div>
                             <div id="summary-difference" style="font-size: 28px; font-weight: bold; color: var(--text-color);">0.00</div>
                         </div>
 
                         <div id="payment-method-container" style="display: none; margin-bottom: 20px;">
-                            <label style="font-size: 12px;">Payment Method</label>
+                            <label style="font-size: 12px;">${__("Payment Method")}</label>
                             <select id="payment-method-select" class="form-control"></select>
                         </div>
 
                         <button id="btn-submit-exchange" class="btn btn-primary btn-block btn-lg" style="font-weight: bold;">
-                            EXCHANGE & SUBMIT
+                            ${__("EXCHANGE & SUBMIT")}
                         </button>
                     </div>
                 </div>
@@ -209,8 +209,8 @@ jahan_kodak.POSExchangeUI = class POSExchangeUI {
         });
 
         if (!has_returnable) {
-            tbody.html('<tr><td colspan="7" class="text-center text-muted">No returnable items available on this invoice.</td></tr>');
-            frappe.show_alert({message: "This invoice has no remaining items available for return.", indicator: "orange"});
+            tbody.html('<tr><td colspan="7" class="text-center text-muted">${__("No returnable items available on this invoice.")}</td></tr>');
+            frappe.show_alert({message: __("This invoice has no remaining items available for return."), indicator: "orange"});
         }
     }
 
@@ -219,7 +219,7 @@ jahan_kodak.POSExchangeUI = class POSExchangeUI {
         tbody.empty();
 
         if (this.state.replacement_items.length === 0) {
-            tbody.html('<tr><td colspan="5" class="text-center text-muted">No replacement items selected.</td></tr>');
+            tbody.html('<tr><td colspan="5" class="text-center text-muted">${__("No replacement items selected.")}</td></tr>');
             return;
         }
 
@@ -282,7 +282,7 @@ jahan_kodak.POSExchangeUI = class POSExchangeUI {
                             } else if (r.message && r.message.items && r.message.items.length > 0) {
                                 me.add_replacement_item(r.message.items[0].item_code);
                             } else {
-                                frappe.show_alert({message: "Item not found", indicator: "orange"});
+                                frappe.show_alert({message: __("Item not found"), indicator: "orange"});
                             }
                             $input.val('');
                         }
@@ -320,7 +320,7 @@ jahan_kodak.POSExchangeUI = class POSExchangeUI {
             if (val > max) {
                 val = max;
                 $(this).val(val);
-                frappe.show_alert({message: `Max returnable for ${item_code} is ${max}`, indicator: "orange"});
+                frappe.show_alert({message: __("Max returnable for {0} is {1}", [item_code, max]), indicator: "orange"});
             }
             if (val < 0) {
                 val = 0;
@@ -426,16 +426,16 @@ jahan_kodak.POSExchangeUI = class POSExchangeUI {
         this.$wrapper.find("#summary-returned-amount").text(format_currency(Math.abs(p.return_total), p.currency));
         this.$wrapper.find("#summary-replacement-amount").text(format_currency(p.replacement_total, p.currency));
         
-        let label_text = "NO PAYMENT REQUIRED";
+        let label_text = __("NO PAYMENT REQUIRED");
         let label_color = "var(--text-muted)";
         let diff_color = "var(--text-color)";
         
         if (p.settlement_type === "customer_pays") {
-            label_text = "CUSTOMER PAYS";
+            label_text = __("CUSTOMER PAYS");
             label_color = "#dc3545"; // Red
             diff_color = "#dc3545";
         } else if (p.settlement_type === "customer_refund") {
-            label_text = "CUSTOMER REFUND";
+            label_text = __("CUSTOMER REFUND");
             label_color = "#28a745"; // Green
             diff_color = "#28a745";
         }
@@ -463,7 +463,7 @@ jahan_kodak.POSExchangeUI = class POSExchangeUI {
         const payload = this.get_payload();
         
         if (payload.return_items.length === 0 && payload.new_items.length === 0) {
-            frappe.show_alert({message: "Please select items to return or replace.", indicator: "orange"});
+            frappe.show_alert({message: __("Please select items to return or replace."), indicator: "orange"});
             return;
         }
 
@@ -471,7 +471,7 @@ jahan_kodak.POSExchangeUI = class POSExchangeUI {
         
         const preview = this.state.preview;
         if (!preview) {
-            frappe.show_alert({message: "Still calculating totals, please wait...", indicator: "orange"});
+            frappe.show_alert({message: __("Still calculating totals, please wait..."), indicator: "orange"});
             return;
         }
 
@@ -479,7 +479,7 @@ jahan_kodak.POSExchangeUI = class POSExchangeUI {
         if (preview.payment_required && preview.settlement_type === "customer_pays") {
             const mode = this.$wrapper.find("#payment-method-select").val();
             if (!mode) {
-                frappe.show_alert({message: "Please select a payment method.", indicator: "red"});
+                frappe.show_alert({message: __("Please select a payment method."), indicator: "red"});
                 return;
             }
             payload.payments = [{
@@ -498,7 +498,7 @@ jahan_kodak.POSExchangeUI = class POSExchangeUI {
         // Lock UI
         this.state.submitting = true;
         const btn = this.$wrapper.find("#btn-submit-exchange");
-        btn.prop("disabled", true).text("PROCESSING...");
+        btn.prop("disabled", true).text(__("PROCESSING..."));
 
         frappe.call({
             method: "jahan_kodak.api.pos_exchange.service.process_exchange",
@@ -510,7 +510,7 @@ jahan_kodak.POSExchangeUI = class POSExchangeUI {
             },
             error: (r) => {
                 this.state.submitting = false;
-                btn.prop("disabled", false).text("EXCHANGE & SUBMIT");
+                btn.prop("disabled", false).text(__("EXCHANGE & SUBMIT"));
                 // The frappe.call automatically shows the user-friendly exception thrown by validators.py
             }
             // In case of timeout, state.submitting remains true, blocking further clicks.
@@ -520,29 +520,29 @@ jahan_kodak.POSExchangeUI = class POSExchangeUI {
 
     show_success(result) {
         const container = this.$wrapper.find(".exchange-container");
-        let settlement_text = "No Payment Required";
+        let settlement_text = __("NO PAYMENT REQUIRED");
         if (result.settlement_type === "customer_pays") {
-            settlement_text = `CUSTOMER PAYS: ${format_currency(result.difference, this.original_invoice_doc.currency)}`;
+            settlement_text = __("CUSTOMER PAYS: {0}", [format_currency(result.difference, this.original_invoice_doc.currency)]);
         } else if (result.settlement_type === "customer_refund") {
-            settlement_text = `CUSTOMER REFUND: ${format_currency(Math.abs(result.difference), this.original_invoice_doc.currency)}`;
+            settlement_text = __("CUSTOMER REFUND: {0}", [format_currency(Math.abs(result.difference), this.original_invoice_doc.currency)]);
         }
 
         container.html(`
             <div class="text-center" style="padding: 40px 20px;">
-                <h2 style="color: #28a745; margin-bottom: 20px;">✓ EXCHANGE COMPLETED</h2>
+                <h2 style="color: #28a745; margin-bottom: 20px;">✓ ${__("EXCHANGE COMPLETED")}</h2>
                 
                 <div style="font-size: 16px; line-height: 2; margin-bottom: 30px;">
-                    <div><strong>Exchange:</strong> ${result.exchange_id}</div>
-                    <div><strong>Original:</strong> ${result.original_invoice}</div>
-                    ${result.return_invoice ? `<div><strong>Return:</strong> ${result.return_invoice}</div>` : ''}
-                    ${result.new_invoice ? `<div><strong>New Sale:</strong> ${result.new_invoice}</div>` : ''}
+                    <div><strong>${__("Exchange:")}</strong> ${result.exchange_id}</div>
+                    <div><strong>${__("Original:")}</strong> ${result.original_invoice}</div>
+                    ${result.return_invoice ? `<div><strong>${__("Return:")}</strong> ${result.return_invoice}</div>` : ''}
+                    ${result.new_invoice ? `<div><strong>${__("New Sale:")}</strong> ${result.new_invoice}</div>` : ''}
                 </div>
                 
                 <h3 style="margin-bottom: 40px; color: var(--text-color);">${settlement_text}</h3>
                 
                 <div style="display: flex; justify-content: center; gap: 20px;">
-                    <button class="btn btn-default btn-lg btn-print-receipt" data-exchange="${result.exchange_id}">PRINT RECEIPT</button>
-                    <button class="btn btn-primary btn-lg btn-close-success">NEW EXCHANGE / CLOSE</button>
+                    <button class="btn btn-default btn-lg btn-print-receipt" data-exchange="${result.exchange_id}">${__("PRINT RECEIPT")}</button>
+                    <button class="btn btn-primary btn-lg btn-close-success">${__("NEW EXCHANGE / CLOSE")}</button>
                 </div>
             </div>
         `);

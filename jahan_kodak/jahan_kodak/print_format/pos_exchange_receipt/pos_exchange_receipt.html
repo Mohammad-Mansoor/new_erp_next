@@ -30,18 +30,18 @@
         </div>
 
         <div class="receipt-title">
-            EXCHANGE
+            {{ _("EXCHANGE") }}
         </div>
 
         <div class="receipt-meta">
             <div>
-                Exchange ID: <strong>{{ doc.name }}</strong>
+                {{ _("Exchange ID:") }} <strong>{{ doc.name }}</strong>
             </div>
             <div>
-                Original Invoice: <strong>{{ doc.original_invoice }}</strong>
+                {{ _("Original Invoice:") }} <strong>{{ doc.original_invoice }}</strong>
             </div>
             <div>
-                Date:
+                {{ _("Date:") }}
                 {% if doc.posting_date and doc.posting_time %}
                     {{ frappe.utils.format_datetime(doc.posting_date ~ ' ' ~ doc.posting_time, "dd-MM-yyyy hh:mm a") }}
                 {% else %}
@@ -49,17 +49,17 @@
                 {% endif %}
             </div>
             <div>
-                Cashier: <strong>{{ doc.owner }}</strong>
+                {{ _("Cashier:") }} <strong>{{ doc.owner }}</strong>
             </div>
             <div>
-                Customer: <strong>{{ "Walk-in Customer" if doc.customer == "Walk-in Customer" else doc.customer }}</strong>
+                {{ _("Customer:") }} <strong>{{ _("Walk-in Customer") if doc.customer == "Walk-in Customer" else doc.customer }}</strong>
             </div>
         </div>
     </div>
 
 
     <div class="divider divider-dashed"></div>
-    <div class="section-title">RETURNED ITEMS</div>
+    <div class="section-title">{{ _("RETURNED ITEMS") }}</div>
     <div class="divider divider-dashed"></div>
 
     <!-- =====================================================
@@ -69,9 +69,9 @@
     <table class="items-table">
         <thead>
             <tr>
-                <th class="text-left item-column">Item</th>
-                <th class="text-center qty-column">Qty</th>
-                <th class="text-right amount-column">Amount</th>
+                <th class="text-left item-column">{{ _("Item") }}</th>
+                <th class="text-center qty-column">{{ _("Qty") }}</th>
+                <th class="text-right amount-column">{{ _("Amount") }}</th>
             </tr>
         </thead>
         <tbody>
@@ -80,10 +80,10 @@
                     <td class="text-left">
                         <div class="item-name">{{ item.item_name or item.item_code }}</div>
                         {% if item.serial_no %}
-                            <div class="item-code">SN: {{ item.serial_no }}</div>
+                            <div class="item-code">{{ _("SN:") }} {{ item.serial_no }}</div>
                         {% endif %}
                         {% if item.batch_no %}
-                            <div class="item-code">Batch: {{ item.batch_no }}</div>
+                            <div class="item-code">{{ _("Batch:") }} {{ item.batch_no }}</div>
                         {% endif %}
                         <div class="item-rate">@ {{ frappe.utils.fmt_money(item.rate) }}</div>
                     </td>
@@ -99,7 +99,7 @@
     </table>
 
     <div class="divider divider-dashed"></div>
-    <div class="section-title">NEW ITEMS</div>
+    <div class="section-title">{{ _("NEW ITEMS") }}</div>
     <div class="divider divider-dashed"></div>
 
     <!-- =====================================================
@@ -109,9 +109,9 @@
     <table class="items-table">
         <thead>
             <tr>
-                <th class="text-left item-column">Item</th>
-                <th class="text-center qty-column">Qty</th>
-                <th class="text-right amount-column">Amount</th>
+                <th class="text-left item-column">{{ _("Item") }}</th>
+                <th class="text-center qty-column">{{ _("Qty") }}</th>
+                <th class="text-right amount-column">{{ _("Amount") }}</th>
             </tr>
         </thead>
         <tbody>
@@ -120,10 +120,10 @@
                     <td class="text-left">
                         <div class="item-name">{{ item.item_name or item.item_code }}</div>
                         {% if item.serial_no %}
-                            <div class="item-code">SN: {{ item.serial_no }}</div>
+                            <div class="item-code">{{ _("SN:") }} {{ item.serial_no }}</div>
                         {% endif %}
                         {% if item.batch_no %}
-                            <div class="item-code">Batch: {{ item.batch_no }}</div>
+                            <div class="item-code">{{ _("Batch:") }} {{ item.batch_no }}</div>
                         {% endif %}
                         <div class="item-rate">@ {{ frappe.utils.fmt_money(item.rate) }}</div>
                     </td>
@@ -139,7 +139,7 @@
     </table>
 
     <div class="divider divider-dashed"></div>
-    <div class="section-title">EXCHANGE SUMMARY</div>
+    <div class="section-title">{{ _("EXCHANGE SUMMARY") }}</div>
     <div class="divider divider-dashed"></div>
 
     <!-- =====================================================
@@ -148,11 +148,11 @@
 
     <div class="totals-wrapper">
         <div class="total-row">
-            <span>Returned Total</span>
+            <span>{{ _("Returned Total") }}</span>
             <span>{{ frappe.utils.fmt_money(doc.return_total) }}</span>
         </div>
         <div class="total-row">
-            <span>New Items Total</span>
+            <span>{{ _("New Items Total") }}</span>
             <span>{{ frappe.utils.fmt_money(doc.replacement_total) }}</span>
         </div>
 
@@ -160,7 +160,7 @@
         
         {% if doc.difference > 0 %}
             <div class="total-row grand-total-row">
-                <span>CUSTOMER PAYS</span>
+                <span>{{ _("CUSTOMER PAYS") }}</span>
                 <span>{{ frappe.utils.fmt_money(doc.difference) }}</span>
             </div>
             {% if doc.payments %}
@@ -168,7 +168,7 @@
                 {% for payment in doc.payments %}
                     {% if payment.amount > 0 %}
                         <div class="total-row payment-row">
-                            <span>Payment Method: {{ payment.mode_of_payment }}</span>
+                            <span>{{ _("Payment Method:") }} {{ payment.mode_of_payment }}</span>
                             <span>{{ frappe.utils.fmt_money(payment.amount) }}</span>
                         </div>
                     {% endif %}
@@ -176,7 +176,7 @@
             {% endif %}
         {% elif doc.difference < 0 %}
             <div class="total-row grand-total-row">
-                <span>CUSTOMER REFUND</span>
+                <span>{{ _("CUSTOMER REFUND") }}</span>
                 <span>{{ frappe.utils.fmt_money(doc.difference * -1) }}</span>
             </div>
             {% if doc.payments %}
@@ -184,7 +184,7 @@
                 {% for payment in doc.payments %}
                     {% if payment.amount < 0 %}
                         <div class="total-row payment-row">
-                            <span>Refund Method: {{ payment.mode_of_payment }}</span>
+                            <span>{{ _("Refund Method:") }} {{ payment.mode_of_payment }}</span>
                             <span>{{ frappe.utils.fmt_money(payment.amount * -1) }}</span>
                         </div>
                     {% endif %}
@@ -192,13 +192,13 @@
             {% endif %}
         {% else %}
             <div class="total-row grand-total-row" style="justify-content: center !important;">
-                <span>NO PAYMENT REQUIRED</span>
+                <span>{{ _("NO PAYMENT REQUIRED") }}</span>
             </div>
         {% endif %}
     </div>
 
     <div class="divider divider-dashed"></div>
-    <div class="section-title">DOCUMENT REFERENCES</div>
+    <div class="section-title">{{ _("DOCUMENT REFERENCES") }}</div>
     <div class="divider divider-dashed"></div>
 
     <div class="receipt-meta references-meta">
@@ -208,17 +208,17 @@
         </div>
         <br>
         <div>
-            Return Invoice:<br>
-            <strong>{{ doc.return_invoice or "N/A" }}</strong>
+            {{ _("Return Invoice:") }}<br>
+            <strong>{{ doc.return_invoice or _("N/A") }}</strong>
         </div>
         <br>
         <div>
-            Replacement Invoice:<br>
-            <strong>{{ doc.replacement_invoice or "N/A" }}</strong>
+            {{ _("Replacement Invoice:") }}<br>
+            <strong>{{ doc.replacement_invoice or _("N/A") }}</strong>
         </div>
         <br>
         <div>
-            Exchange:<br>
+            {{ _("Exchange:") }}<br>
             <strong>{{ doc.name }}</strong>
         </div>
     </div>
@@ -232,7 +232,7 @@
 
     <div class="receipt-footer">
         <div class="footer-message">
-            Thank you for shopping with<br>
+            {{ _("Thank you for shopping with") }}<br>
             {{ doc.company }}
         </div>
         
@@ -442,9 +442,9 @@
         white-space: nowrap !important;
     }
 
-    .text-left { text-align: left !important; }
+    .text-left { text-align: start !important; }
     .text-center { text-align: center !important; }
-    .text-right { text-align: right !important; }
+    .text-right { text-align: end !important; }
 
     .totals-wrapper {
         display: block !important;
@@ -474,7 +474,7 @@
 
     .total-row span:last-child {
         flex-shrink: 0;
-        text-align: right;
+        text-align: end;
         white-space: nowrap;
     }
 

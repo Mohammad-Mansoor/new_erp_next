@@ -1,0 +1,72 @@
+POS EXCHANGE,تعویض در فروشگاه
+Original Invoice:,فاکتور اصلی:
+Customer:,مشتری:
+✕ Cancel,✕ لغو
+Return Items,اقلام برگشتی
+Item,جنس
+Price,قیمت
+Original Qty,تعداد اصلی
+Already Returned,قبلاً برگشت داده شده
+Remaining,باقیمانده
+Return Qty,تعداد برگشتی
+Total Price,قیمت کل
+Calculating returnable quantities...,در حال محاسبه تعداد قابل برگشت...
+No returnable items available on this invoice.,هیچ جنس قابل برگشتی در این فاکتور موجود نیست.
+This invoice has no remaining items available for return.,این فاکتور هیچ جنس باقیمانده‌ای برای برگشت ندارد.
+Replacement Items,اقلام جایگزین
+📷 Scan barcode or search item...,📷 اسکن بارکد یا جستجوی جنس...
+Qty,تعداد
+No replacement items selected.,هیچ جنس جایگزینی انتخاب نشده است.
+Exchange Summary,خلاصه تعویض
+Returned Amount:,مبلغ برگشتی:
+Replacement Amount:,مبلغ جایگزین:
+NO PAYMENT REQUIRED,نیازی به پرداخت نیست
+Payment Method,روش پرداخت
+EXCHANGE & SUBMIT,تعویض و ثبت
+Max returnable for {0} is {1},حداکثر مقدار قابل برگشت برای {0} برابر با {1} است
+Item not found,جنس یافت نشد
+CUSTOMER PAYS,پرداختی مشتری
+CUSTOMER REFUND,بازگشتی به مشتری
+CUSTOMER PAYS: {0},پرداختی مشتری: {0}
+CUSTOMER REFUND: {0},بازگشتی به مشتری: {0}
+Please select items to return or replace.,لطفاً اقلامی را برای برگشت یا جایگزینی انتخاب کنید.
+Still calculating totals, please wait...,در حال محاسبه مجموع، لطفاً صبر کنید...
+Please select a payment method.,لطفاً یک روش پرداخت انتخاب کنید.
+PROCESSING...,در حال پردازش...
+✓ EXCHANGE COMPLETED,✓ تعویض با موفقیت انجام شد
+Exchange:,تعویض:
+Original:,اصلی:
+Return:,برگشت:
+New Sale:,فروش جدید:
+PRINT RECEIPT,چاپ رسید
+NEW EXCHANGE / CLOSE,تعویض جدید / بستن
+📷 Scan / Type Receipt # for Return...,📷 اسکن / تایپ شماره رسید برای برگشت...
+Return ↵,برگشت ↵
+No Mode of Payment configured for POS Profile {0},هیچ روش پرداختی برای پروفایل فروشگاه {0} پیکربندی نشده است
+EXCHANGE,تعویض
+Exchange ID:,شناسه تعویض:
+Date:,تاریخ:
+Cashier:,صندوقدار:
+Walk-in Customer,مشتری عبوری
+RETURNED ITEMS,اقلام برگشتی
+Amount,مبلغ
+SN:,شماره سریال:
+Batch:,دسته:
+NEW ITEMS,اقلام جدید
+Returned Total,مجموع برگشتی
+New Items Total,مجموع اقلام جدید
+Payment Method:,روش پرداخت:
+Refund Method:,روش بازگشت وجه:
+DOCUMENT REFERENCES,مراجع سند
+Return Invoice:,فاکتور برگشتی:
+Replacement Invoice:,فاکتور جایگزین:
+N/A,ندارد
+Thank you for shopping with,با تشکر از خرید شما از
+SALES RECEIPT,رسید فروش
+Invoice:,فاکتور:
+Subtotal,جمع کل
+Discount,تخفیف
+Tax,مالیات
+TOTAL,مبلغ کل
+Change,مابقی
+Thank you for shopping with us!,با تشکر از خرید شما!

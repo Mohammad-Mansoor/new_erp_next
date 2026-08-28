@@ -13,7 +13,7 @@ def get_default_mop(pos_profile):
     )
     
     if not mops:
-        frappe.throw("No Mode of Payment configured for POS Profile {0}".format(pos_profile))
+        frappe.throw(_("No Mode of Payment configured for POS Profile {0}").format(pos_profile))
         
     for mop in mops:
         if mop.default:

@@ -36,10 +36,10 @@ frappe.provide("jahan_kodak.pos");
 				<input type="text" 
 					id="pos-quick-return-input" 
 					class="form-control input-sm" 
-					placeholder="📷 Scan / Type Receipt # for Return..." 
+					placeholder="${__('📷 Scan / Type Receipt # for Return...')}" 
 					style="width: 250px; height: 32px; font-size: 12px; border: 2px solid #f39c12; border-radius: 6px; padding: 0 10px; background-color: #fffde7; color: #111; font-weight: 500;" />
 				<button id="btn-quick-return-submit" class="btn btn-xs btn-warning ml-1" style="height: 32px; font-weight: bold; padding: 0 12px; border-radius: 6px; background-color: #f39c12; border-color: #e67e22; color: #fff;">
-					Return ↵
+					${__('Return ↵')}
 				</button>
 			</div>
 		`);
