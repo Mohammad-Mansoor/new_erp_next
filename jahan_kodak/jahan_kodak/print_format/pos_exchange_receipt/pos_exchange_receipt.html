@@ -25,8 +25,8 @@
     ====================================================== -->
 
     <div class="receipt-header">
-        <div class="company-name">
-            {{ doc.company }}
+        <div class="company-name" dir="rtl" style="font-family: Tahoma, Arial, sans-serif;">
+            جهان کودک
         </div>
 
         <div class="receipt-title">
@@ -34,37 +34,44 @@
         </div>
 
         <div class="receipt-meta">
+            {% if doc.replacement_invoice %}
+            <div style="text-align: center; margin-bottom: 6px;">
+                <img src="https://quickchart.io/barcode?type=code128&text={{ doc.replacement_invoice }}&height=20&width=120" alt="Barcode" style="margin: 4px auto; display: block;">
+                <span style="font-size: 10px;">{{ doc.replacement_invoice }}</span>
+            </div>
+            {% endif %}
             <div>
                 {{ _("Exchange ID:") }} <strong>{{ doc.name }}</strong>
             </div>
+            <!--
             <div>
                 {{ _("Original Invoice:") }} <strong>{{ doc.original_invoice }}</strong>
             </div>
+            -->
             <div>
                 {{ _("Date:") }}
                 {% if doc.posting_date and doc.posting_time %}
                     {{ frappe.utils.format_datetime(doc.posting_date ~ ' ' ~ doc.posting_time, "dd-MM-yyyy hh:mm a") }}
                 {% else %}
-                    {{ frappe.utils.formatdate(doc.creation) }}
+                    {{ frappe.utils.format_datetime(doc.creation, "dd-MM-yyyy hh:mm a") }}
                 {% endif %}
             </div>
+            <!--
             <div>
                 {{ _("Cashier:") }} <strong>{{ doc.owner }}</strong>
             </div>
             <div>
                 {{ _("Customer:") }} <strong>{{ _("Walk-in Customer") if doc.customer == "Walk-in Customer" else doc.customer }}</strong>
             </div>
+            -->
         </div>
     </div>
 
 
+    <!-- 
     <div class="divider divider-dashed"></div>
     <div class="section-title">{{ _("RETURNED ITEMS") }}</div>
     <div class="divider divider-dashed"></div>
-
-    <!-- =====================================================
-         RETURNED ITEMS
-    ====================================================== -->
 
     <table class="items-table">
         <thead>
@@ -102,10 +109,6 @@
     <div class="section-title">{{ _("NEW ITEMS") }}</div>
     <div class="divider divider-dashed"></div>
 
-    <!-- =====================================================
-         NEW ITEMS
-    ====================================================== -->
-
     <table class="items-table">
         <thead>
             <tr>
@@ -137,6 +140,7 @@
             {% endfor %}
         </tbody>
     </table>
+    -->
 
     <div class="divider divider-dashed"></div>
     <div class="section-title">{{ _("EXCHANGE SUMMARY") }}</div>
@@ -197,6 +201,7 @@
         {% endif %}
     </div>
 
+    <!-- 
     <div class="divider divider-dashed"></div>
     <div class="section-title">{{ _("DOCUMENT REFERENCES") }}</div>
     <div class="divider divider-dashed"></div>
@@ -222,6 +227,7 @@
             <strong>{{ doc.name }}</strong>
         </div>
     </div>
+    -->
 
 
     <div class="divider divider-dashed"></div>
@@ -231,20 +237,7 @@
     ====================================================== -->
 
     <div class="receipt-footer">
-        <div class="footer-message">
-            {{ _("Thank you for shopping with") }}<br>
-            {{ doc.company }}
-        </div>
-        
-        <img
-            id="receipt-qr-code"
-            class="qr-code"
-            src="https://quickchart.io/qr?text={{ doc.name }}&size=200&margin=1&format=png"
-            width="96"
-            height="96"
-            alt="Receipt QR Code"
-        >
-        <div class="cutter-space"></div>
+        <div class="footer-msg" dir="rtl" style="font-family: Tahoma, Arial, sans-serif; font-size: 10px;">در منزل سوم صرف لباس وكفش قابل تعويض ويا مسترد كردن ميباشدا</div>
     </div>
 </div>
 

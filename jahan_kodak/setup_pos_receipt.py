@@ -69,39 +69,17 @@ POS_RECEIPT_HTML = r"""
     ====================================================== -->
 
     <div class="receipt-header">
-        <div class="company-name">
-            {{ doc.company }}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            
+        <div class="company-name" dir="rtl" style="font-family: Tahoma, Arial, sans-serif;">
+            جهان کودک
         </div>
 
         <div class="receipt-title">
             SALES RECEIPT
         </div>
 
-        <div class="receipt-meta">
-            <div>
-                Invoice:
-                <strong>{{ doc.name }}</strong>
+        <div class="receipt-meta" style="text-align: center;">
+            <div style="margin-bottom: 6px;">
+                <img src="https://quickchart.io/barcode?type=code128&text={{ doc.name }}&height=20&width=120" alt="Barcode" style="margin: 4px auto; display: block;">
             </div>
 
             <div>
@@ -127,20 +105,20 @@ POS_RECEIPT_HTML = r"""
          ITEMS
     ====================================================== -->
 
-    <table class="items-table">
+    <table class="items-table" dir="rtl">
 
         <thead>
             <tr>
-                <th class="text-left item-column">
-                    Item
+                <th class="text-right item-column" style="font-family: Tahoma, Arial, sans-serif;">
+                    کالا (Item)
                 </th>
 
-                <th class="text-center qty-column">
-                    Qty
+                <th class="text-center qty-column" style="font-family: Tahoma, Arial, sans-serif;">
+                    تعداد (Qty)
                 </th>
 
-                <th class="text-right amount-column">
-                    Amount
+                <th class="text-left amount-column" style="font-family: Tahoma, Arial, sans-serif;">
+                    مبلغ (Amount)
                 </th>
             </tr>
         </thead>
@@ -149,7 +127,7 @@ POS_RECEIPT_HTML = r"""
             {% for item in doc.items %}
                 <tr class="item-row">
 
-                    <td class="text-left">
+                    <td class="text-right">
                         <div class="item-name">
                             {{ item.item_name or item.item_code }}
                         </div>
@@ -177,7 +155,7 @@ POS_RECEIPT_HTML = r"""
                         {% endif %}
                     </td>
 
-                    <td class="text-right value-cell">
+                    <td class="text-left value-cell">
                         {{ frappe.utils.fmt_money(
                             item.amount,
                             currency=doc.currency
@@ -226,7 +204,7 @@ POS_RECEIPT_HTML = r"""
                         </span>
 
                         <span>
-                            {{ tax.get_formatted("tax_amount") }}
+                            {{ frappe.utils.fmt_money(tax.tax_amount, currency=doc.currency) }}
                         </span>
                     </div>
                 {% endif %}
@@ -259,7 +237,7 @@ POS_RECEIPT_HTML = r"""
                         </span>
 
                         <span>
-                            {{ payment.get_formatted("amount") }}
+                            {{ frappe.utils.fmt_money(payment.amount, currency=doc.currency) }}
                         </span>
                     </div>
                 {% endif %}
@@ -289,27 +267,9 @@ POS_RECEIPT_HTML = r"""
 
     <div class="receipt-footer">
 
-        <div class="footer-message">
-            Thank you for shopping with us!
+        <div class="footer-message" dir="rtl" style="font-family: Tahoma, Arial, sans-serif; font-size: 10px; margin-bottom: 8px;">
+            در منزل سوم صرف لباس وكفش قابل تعويض ويا مسترد كردن ميباشدا
         </div>
-
-        <div class="powered-by">
-            Jahan Kodak
-        </div>
-
-        <img
-            id="receipt-qr-code"
-            class="qr-code"
-            src="https://quickchart.io/qr?text={{ doc.name }}&size=200&margin=1&format=png"
-            width="96"
-            height="96"
-            alt="Receipt QR Code"
-        >
-
-
-        # <div class="cutter-space">------------------------------------------</div>
-        # <div class="cutter-space">------------------------------------------</div>
-        # <div class="cutter-space">------------------------------------------</div>
 
     </div>
 

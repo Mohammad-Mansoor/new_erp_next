@@ -3,13 +3,13 @@ import frappe
 POS_RECEIPT_HTML = """<div class="pos-receipt">
     <!-- Header -->
     <div class="receipt-header">
-        <h2 class="company-name">{{ doc.company }}</h2>
+        <h2 class="company-name" dir="rtl" style="font-family: Tahoma, Arial, sans-serif;">جهان کودک</h2>
         {% if letter_head %}
             <div class="letterhead-wrapper">{{ letter_head }}</div>
         {% endif %}
         <div class="receipt-title">SALES RECEIPT</div>
-        <div class="meta-row">
-            <span>Invoice: <strong>{{ doc.name }}</strong></span>
+        <div class="meta-row" style="text-align: center;">
+            <img src="https://quickchart.io/barcode?type=code128&text={{ doc.name }}&height=20&width=120" alt="Barcode" style="margin: 4px auto; display: block;">
             <span>Date: {{ frappe.utils.format_datetime(doc.posting_date ~ ' ' ~ doc.posting_time, "dd-MM-yyyy hh:mm a") if doc.posting_date and doc.posting_time else frappe.utils.formatdate(doc.posting_date) }}</span>
         </div>
     </div>
@@ -17,23 +17,23 @@ POS_RECEIPT_HTML = """<div class="pos-receipt">
     <div class="divider-dashed"></div>
 
     <!-- Items Table -->
-    <table class="items-table">
+    <table class="items-table" dir="rtl">
         <thead>
             <tr>
-                <th class="text-left" style="width: 50%;">Item</th>
-                <th class="text-center" style="width: 15%;">Qty</th>
-                <th class="text-right" style="width: 35%;">Amount</th>
+                <th class="text-right" style="width: 50%; font-family: Tahoma, Arial, sans-serif;">کالا (Item)</th>
+                <th class="text-center" style="width: 15%; font-family: Tahoma, Arial, sans-serif;">تعداد (Qty)</th>
+                <th class="text-left" style="width: 35%; font-family: Tahoma, Arial, sans-serif;">مبلغ (Amount)</th>
             </tr>
         </thead>
         <tbody>
             {% for item in doc.items %}
             <tr>
-                <td class="text-left">
+                <td class="text-right">
                     <div class="item-name">{{ item.item_name }}</div>
-                    <div class="item-meta">@ {{ doc.get_formatted('rate', item) }}</div>
+                    <div class="item-meta">@ {{ frappe.utils.fmt_money(item.rate, currency=doc.currency) }}</div>
                 </td>
                 <td class="text-center val-align">{{ item.qty | int if item.qty == item.qty | int else item.qty }}</td>
-                <td class="text-right val-align">{{ doc.get_formatted('amount', item) }}</td>
+                <td class="text-left val-align">{{ frappe.utils.fmt_money(item.amount, currency=doc.currency) }}</td>
             </tr>
             {% endfor %}
         </tbody>
@@ -59,7 +59,7 @@ POS_RECEIPT_HTML = """<div class="pos-receipt">
         {% if tax.tax_amount %}
         <div class="total-row">
             <span>{{ tax.description or 'Tax' }}</span>
-            <span>{{ doc.get_formatted('tax_amount', tax) }}</span>
+            <span>{{ frappe.utils.fmt_money(tax.tax_amount, currency=doc.currency) }}</span>
         </div>
         {% endif %}
         {% endfor %}
@@ -79,7 +79,7 @@ POS_RECEIPT_HTML = """<div class="pos-receipt">
                 {% if p.amount %}
                 <div class="total-row payment-row">
                     <span>{{ p.mode_of_payment }}</span>
-                    <span>{{ doc.get_formatted('amount', p) }}</span>
+                    <span>{{ frappe.utils.fmt_money(p.amount, currency=doc.currency) }}</span>
                 </div>
                 {% endif %}
             {% endfor %}
@@ -97,9 +97,7 @@ POS_RECEIPT_HTML = """<div class="pos-receipt">
 
     <!-- Footer QR & Thank You -->
     <div class="receipt-footer">
-        <img src="https://quickchart.io/qr?text={{ doc.name }}&size=140" class="qr-code" alt="Receipt QR" />
-        <div class="footer-msg">Thank you for shopping with us!</div>
-        <div class="powered-by">Jahan Kodak</div>
+        <div class="footer-msg" dir="rtl" style="font-family: Tahoma, Arial, sans-serif; font-size: 10px;">در منزل سوم صرف لباس وكفش قابل تعويض ويا مسترد كردن ميباشدا</div>
     </div>
 </div>
 
