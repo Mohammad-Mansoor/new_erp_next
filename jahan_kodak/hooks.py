@@ -29,7 +29,8 @@ app_include_js = "/assets/jahan_kodak/js/pos_quick_return.js"
 page_js = {
     "point-of-sale": [
         "public/js/pos_quick_return.js",
-        "public/js/pos_exchange_ui.js"
+        "public/js/pos_exchange_ui.js",
+        "public/js/pos_single_key_workflow.js"
     ]
 }
 

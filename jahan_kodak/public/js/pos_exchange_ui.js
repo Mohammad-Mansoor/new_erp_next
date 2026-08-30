@@ -49,6 +49,11 @@ jahan_kodak.POSExchangeUI = class POSExchangeUI {
             </div>
         </div>`);
         $("body").append(this.$wrapper);
+        
+        // Hide the underlying POS to prevent Frappe's native onScan from adding items to the background invoice
+        if (window.cur_pos && cur_pos.item_selector && cur_pos.item_selector.$component) {
+            cur_pos.item_selector.$component.hide();
+        }
     }
 
     render_base_layout() {
@@ -257,39 +262,59 @@ jahan_kodak.POSExchangeUI = class POSExchangeUI {
         const me = this;
         const $input = this.$wrapper.find("#replacement-item-search");
 
+        let is_searching = false;
 
-        // Handle barcode scanner 'Enter' explicitly
+        const execute_search = (term) => {
+            if (!term || is_searching) return;
+            
+            is_searching = true;
+            $input.prop("disabled", true);
+            
+            frappe.call({
+                method: "erpnext.selling.page.point_of_sale.point_of_sale.get_items",
+                args: {
+                    search_term: term,
+                    pos_profile: me.original_invoice_doc.pos_profile,
+                    price_list: me.original_invoice_doc.selling_price_list,
+                    page_length: 1,
+                    start: 0,
+                    item_group: ""
+                },
+                callback: function(r) {
+                    is_searching = false;
+                    $input.prop("disabled", false);
+                    if (r.message && r.message.barcode) {
+                        me.add_replacement_item(r.message.barcode);
+                    } else if (r.message && r.message.items && r.message.items.length > 0) {
+                        me.add_replacement_item(r.message.items[0].item_code);
+                    } else {
+                        frappe.show_alert({message: __("Item not found"), indicator: "orange"});
+                    }
+                    $input.val('');
+                    // Refocus for next scan immediately
+                    setTimeout(() => $input.focus(), 10);
+                }
+            });
+        };
+
+        // Handle explicit 'Enter' (for manual typing or scanners that send Enter)
         $input.on("keypress", function(e) {
             if (e.which === 13) {
                 e.preventDefault();
                 e.stopPropagation();
                 e.stopImmediatePropagation();
                 const term = $(this).val().trim();
-                if (term) {
-                    frappe.call({
-                        method: "erpnext.selling.page.point_of_sale.point_of_sale.get_items",
-                        args: {
-                            search_term: term,
-                            pos_profile: me.original_invoice_doc.pos_profile,
-                            price_list: me.original_invoice_doc.selling_price_list,
-                            page_length: 1,
-                            start: 0,
-                            item_group: ""
-                        },
-                        callback: function(r) {
-                            if (r.message && r.message.barcode) {
-                                me.add_replacement_item(r.message.barcode);
-                            } else if (r.message && r.message.items && r.message.items.length > 0) {
-                                me.add_replacement_item(r.message.items[0].item_code);
-                            } else {
-                                frappe.show_alert({message: __("Item not found"), indicator: "orange"});
-                            }
-                            $input.val('');
-                        }
-                    });
-                }
+                execute_search(term);
             }
         });
+
+        // Detect native ERPNext hardware barcode scan
+        this.scan_handler = (e) => {
+            if (e.detail && e.detail.scanCode) {
+                execute_search(e.detail.scanCode);
+            }
+        };
+        document.addEventListener("scan", this.scan_handler);
     }
 
     add_replacement_item(item_code) {
@@ -562,10 +587,24 @@ jahan_kodak.POSExchangeUI = class POSExchangeUI {
             this.close();
             // Refresh POS cart if necessary, but returning to POS clears it
         });
+        
+        // Automatically trigger print on success
+        container.find(".btn-print-receipt").click();
     }
 
     close() {
         this.$wrapper.remove();
+        
+        // Clean up global scan listener
+        if (this.scan_handler) {
+            document.removeEventListener("scan", this.scan_handler);
+        }
+        
+        // Restore the underlying POS component
+        if (window.cur_pos && cur_pos.item_selector && cur_pos.item_selector.$component) {
+            cur_pos.item_selector.$component.show();
+        }
+
         // Remove object reference
         if (window.cur_pos_exchange) {
             delete window.cur_pos_exchange;
