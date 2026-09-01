@@ -97,7 +97,9 @@ POS_RECEIPT_HTML = """<div class="pos-receipt">
 
     <!-- Footer QR & Thank You -->
     <div class="receipt-footer">
-        <div class="footer-msg" dir="rtl" style="font-family: Tahoma, Arial, sans-serif; font-size: 10px;">در منزل سوم صرف لباس وكفش قابل تعويض ويا مسترد كردن ميباشدا</div>
+            <div class="footer-message" dir="rtl" style="font-family: Tahoma, Arial, sans-serif; font-size: 10px; margin-bottom: 8px; color: red !important;">
+            در منزل سوم صرف لباس وكفش قابل تعويض ويا مسترد كردن ميباشدا
+        </div>
     </div>
 </div>
 
@@ -105,6 +107,9 @@ POS_RECEIPT_HTML = """<div class="pos-receipt">
     @page {
         size: 78mm auto;
         margin: 0;
+    }
+    * {
+        font-weight: bold !important;
     }
     body, html {
         margin: 0;
@@ -158,7 +163,8 @@ POS_RECEIPT_HTML = """<div class="pos-receipt">
     }
     .items-table th {
         font-size: 11px;
-        font-weight: 700;
+        font-weight: bold !important;
+        color: #000000 !important;
         border-bottom: 1px solid #000000;
         padding-bottom: 3px;
     }
