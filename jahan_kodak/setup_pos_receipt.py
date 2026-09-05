@@ -266,7 +266,7 @@ POS_RECEIPT_HTML = r"""
     ====================================================== -->
 
     <div class="receipt-footer">
-        <div class="footer-message" dir="rtl" style="font-family: Tahoma, Arial, sans-serif; font-size: 10px; margin-bottom: 8px; color: red !important;">
+        <div class="footer-message" dir="rtl" style="font-family: Tahoma, Arial, sans-serif; font-size: 10px; margin-bottom: 8px; color: black !important; font-weight: bold !important;">
             در منزل سوم صرف لباس وكفش قابل تعويض ويا مسترد كردن ميباشدا
         </div>
 

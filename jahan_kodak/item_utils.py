@@ -151,9 +151,9 @@ def get_bulk_barcode_html(receipt_name):
 			page-break-after: auto;
 		}
 		.header { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-		.subheader { font-size: 10px; font-weight: 600; color: #333333; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+		.subheader { font-size: 10px; font-weight: bold; color: black; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 		.barcode-container { width: 46mm; height: 18mm; margin: 0 auto; }
-		.price { font-size: 12px; font-weight: 900; margin-top: 2px; }
+		.price { font-size: 12px; font-weight: bold; color: black; margin-top: 2px; }
 	</style>
 </head>
 <body onload="setTimeout(function(){ window.print(); }, 500);">''')
