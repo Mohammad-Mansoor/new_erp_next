@@ -1,4 +1,5 @@
 frappe.provide("jahan_kodak.pos");
+console.log("POS Quick Return - Update v2 Loaded");
 
 (function() {
 	function getRouteStr() {
@@ -99,26 +100,38 @@ frappe.provide("jahan_kodak.pos");
 						.then((r) => {
 							frappe.dom.unfreeze();
 
-							if (r && r.message && r.message.name) {
-								frappe.msgprint({
-									title: __("Already Returned"),
-									indicator: "orange",
-									message: __("Invoice <b>{0}</b> has already been returned via Return Invoice <b>{1}</b>.", [
-										frappe.utils.escape_html(doc.name),
-										frappe.utils.escape_html(r.message.name),
-									]),
+							const launchExchangeUI = () => {
+								// Launch POS Exchange UI
+								window.cur_pos_exchange = new jahan_kodak.POSExchangeUI({ 
+									original_invoice: doc,
+									current_pos_profile: window.cur_pos ? (window.cur_pos.pos_profile || (window.cur_pos.settings && window.cur_pos.settings.pos_profile)) : "" 
 								});
-								return;
+
+								$("#pos-quick-return-input").val("");
+								frappe.show_alert({
+									message: __("Loaded POS Exchange for Receipt <b>{0}</b>", [frappe.utils.escape_html(invoiceId)]),
+									indicator: "green",
+								});
+							};
+
+							if (r && r.message && r.message.name) {
+								frappe.confirm(
+									__("Invoice <b>{0}</b> already has a return record (<b>{1}</b>).<br><br>Do you want to process an additional return for the remaining items?", [
+										frappe.utils.escape_html(doc.name),
+										frappe.utils.escape_html(r.message.name)
+									]),
+									() => {
+										// User clicked Yes
+										launchExchangeUI();
+									},
+									() => {
+										// User clicked No
+										$("#pos-quick-return-input").val("");
+									}
+								);
+							} else {
+								launchExchangeUI();
 							}
-
-							// Launch POS Exchange UI
-							window.cur_pos_exchange = new jahan_kodak.POSExchangeUI({ original_invoice: doc });
-
-							$("#pos-quick-return-input").val("");
-							frappe.show_alert({
-								message: __("Loaded POS Exchange for Receipt <b>{0}</b>", [frappe.utils.escape_html(invoiceId)]),
-								indicator: "green",
-							});
 						})
 						.catch(() => {
 							frappe.dom.unfreeze();

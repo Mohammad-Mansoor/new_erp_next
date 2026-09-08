@@ -1,6 +1,6 @@
 import frappe
 
-def create_replacement_invoice(original_invoice, new_items):
+def create_replacement_invoice(original_invoice, new_items, current_pos_profile=None):
     """
     Creates and returns a draft POS Invoice for the replacement items.
     """
@@ -12,7 +12,7 @@ def create_replacement_invoice(original_invoice, new_items):
     # Inherit context from the original invoice to ensure POS consistency
     new_doc.customer = original_invoice.customer
     new_doc.company = original_invoice.company
-    new_doc.pos_profile = original_invoice.pos_profile
+    new_doc.pos_profile = current_pos_profile or original_invoice.pos_profile
     new_doc.currency = original_invoice.currency
     new_doc.selling_price_list = original_invoice.selling_price_list
     new_doc.is_pos = 1

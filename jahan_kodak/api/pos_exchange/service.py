@@ -26,10 +26,22 @@ def _build_exchange_context(payload, for_update=False):
     original_invoice_name = payload.get("original_invoice")
     return_items = payload.get("return_items", [])
     new_items = payload.get("new_items", [])
+    current_pos_profile = payload.get("current_pos_profile")
     
     # 1. Validate original invoice
     original_invoice = validate_original_invoice(original_invoice_name, for_update=for_update)
     
+    if not current_pos_profile:
+        pos_profiles = frappe.get_all("POS Profile User", filters={"user": frappe.session.user, "default": 1}, pluck="parent")
+        if pos_profiles:
+            current_pos_profile = pos_profiles[0]
+        else:
+            pos_profiles = frappe.get_all("POS Profile User", filters={"user": frappe.session.user}, pluck="parent")
+            if pos_profiles:
+                current_pos_profile = pos_profiles[0]
+            else:
+                current_pos_profile = original_invoice.pos_profile
+                
     # 2. Concurrency protection: Recalculate remaining quantities
     remaining_qty_map = calculate_remaining_returnable_qty(original_invoice)
     
@@ -44,10 +56,10 @@ def _build_exchange_context(payload, for_update=False):
     new_doc = None
     
     if return_items:
-        return_doc = create_return_invoice(original_invoice, return_items)
+        return_doc = create_return_invoice(original_invoice, return_items, current_pos_profile)
         
     if new_items:
-        new_doc = create_replacement_invoice(original_invoice, new_items)
+        new_doc = create_replacement_invoice(original_invoice, new_items, current_pos_profile)
         
     # 6. Calculate authoritative difference
     return_total, new_total, difference = calculate_exchange_difference(return_doc, new_doc)
@@ -61,7 +73,8 @@ def _build_exchange_context(payload, for_update=False):
         "difference": difference,
         "return_items": return_items,
         "new_items": new_items,
-        "payload": payload
+        "payload": payload,
+        "current_pos_profile": current_pos_profile
     }
 
 @frappe.whitelist()
@@ -85,7 +98,7 @@ def calculate_exchange(payload):
     payment_methods = []
     if settlement_type == "customer_pays":
         # Fetch payment methods for POS Profile
-        pos_profile = context["original_invoice"].pos_profile
+        pos_profile = context["current_pos_profile"]
         profile_doc = frappe.get_doc("POS Profile", pos_profile)
         for pm in profile_doc.payments:
             payment_methods.append({
@@ -173,7 +186,7 @@ def process_exchange(payload):
         exchange_doc.replacement_invoice = new_invoice_name
         exchange_doc.customer = context["original_invoice"].customer
         exchange_doc.company = context["original_invoice"].company
-        exchange_doc.pos_profile = context["original_invoice"].pos_profile
+        exchange_doc.pos_profile = context["current_pos_profile"]
         exchange_doc.status = "Completed"
         exchange_doc.return_total = context["return_total"]
         exchange_doc.replacement_total = context["new_total"]

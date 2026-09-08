@@ -1,12 +1,15 @@
 import frappe
 from erpnext.controllers.sales_and_purchase_return import make_return_doc
 
-def create_return_invoice(original_invoice, return_items):
+def create_return_invoice(original_invoice, return_items, current_pos_profile=None):
     """
     Creates and returns a draft POS Return Invoice based on the specified returned items.
     """
     # Create the standard return document in memory
     return_doc = make_return_doc("POS Invoice", original_invoice.name)
+    
+    if current_pos_profile:
+        return_doc.pos_profile = current_pos_profile
     
     # Map the return request for easy lookup
     # Because there can be multiple rows with the same item, we need to match carefully,

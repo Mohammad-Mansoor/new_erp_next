@@ -24,11 +24,11 @@ app_license = "mit"
 # Includes in <head>
 # ------------------
 
-app_include_js = "/assets/jahan_kodak/js/pos_quick_return.js"
+app_include_js = "/assets/jahan_kodak/js/pos_quick_return_v2.js"
 
 page_js = {
     "point-of-sale": [
-        "public/js/pos_quick_return.js",
+        "public/js/pos_quick_return_v2.js",
         "public/js/pos_exchange_ui.js",
         "public/js/pos_single_key_workflow.js"
     ]

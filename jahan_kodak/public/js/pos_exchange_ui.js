@@ -3,6 +3,7 @@ frappe.provide("jahan_kodak.pos");
 jahan_kodak.POSExchangeUI = class POSExchangeUI {
     constructor(opts) {
         this.original_invoice_doc = opts.original_invoice;
+        this.current_pos_profile = opts.current_pos_profile || "";
         this.idempotency_key = frappe.utils.get_random(20);
         
         this.state = {
@@ -407,7 +408,8 @@ jahan_kodak.POSExchangeUI = class POSExchangeUI {
             original_invoice: this.original_invoice_doc.name,
             return_items: ret_items,
             new_items: [...this.state.replacement_items],
-            payments: [] // Populated during submit
+            payments: [], // Populated during submit
+            current_pos_profile: this.current_pos_profile
         };
     }
 
