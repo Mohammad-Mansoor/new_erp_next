@@ -77,6 +77,9 @@ jinja = {
 doc_events = {
 	"Item": {
 		"before_insert": "jahan_kodak.item_utils.auto_generate_barcode"
+	},
+	"POS Invoice": {
+		"on_submit": "jahan_kodak.api.realtime_pos.auto_consolidate_pos_invoice"
 	}
 }
 
@@ -134,9 +137,9 @@ doctype_js = {
 # ---------------
 # Override standard doctype classes
 
-# override_doctype_class = {
-# 	"ToDo": "custom_app.overrides.CustomToDo"
-# }
+override_doctype_class = {
+	"POS Closing Entry": "jahan_kodak.api.realtime_pos.CustomPOSClosingEntry"
+}
 
 # Document Events
 # ---------------
@@ -178,10 +181,10 @@ doctype_js = {
 
 # Overriding Methods
 # ------------------------------
-#
-# override_whitelisted_methods = {
-# 	"frappe.desk.doctype.event.event.get_events": "jahan_kodak.event.get_events"
-# }
+
+override_whitelisted_methods = {
+	"erpnext.accounts.doctype.pos_closing_entry.pos_closing_entry.get_pos_invoices": "jahan_kodak.api.realtime_pos.get_pos_invoices_for_closing"
+}
 #
 # each overriding function accepts a `data` argument;
 # generated from the base implementation of the doctype dashboard,
