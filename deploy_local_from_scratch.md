@@ -1,58 +1,56 @@
-# Local Server Deployment Guide (From Zero to Live)
+# Local Server (Branch) Deployment Guide: Step-by-Step
 
-This guide provides step-by-step instructions to set up a brand new Ubuntu server from scratch, install all prerequisites (Node, Python, MariaDB, Redis), install Frappe, ERPNext, HRMS, and your custom apps (`jahan_kodak` and `jk_sync`), and configure it for production on the **Local Server (Branch Node)**.
+This guide provides exactly what you need to deploy the **Local Server** (Branch Node) from an absolute zero state (a fresh Ubuntu OS) to a live production state. 
+You can log into your fresh server via SSH and copy/paste these commands one by one.
 
----
-
-## 1. Server Prerequisites & OS Setup
-We assume you are running a fresh installation of **Ubuntu 22.04 LTS**.
-
-Log in to your server as `root` (or a user with sudo privileges) and update the system:
+## 1. System Update & Dependencies
+We assume a fresh installation of **Ubuntu 24.04 LTS** (which includes Python 3.12).
+*Explanation: Updates the package manager and installs standard tools we will need later.*
 ```bash
 sudo apt update && sudo apt upgrade -y
-sudo apt install -y git curl wget software-properties-common cron
+sudo apt install -y git curl wget software-properties-common cron xvfb libfontconfig wkhtmltopdf libmysqlclient-dev
 ```
 
 ## 2. Create the Frappe User
-Frappe cannot be run as `root`. We must create a dedicated user.
+*Explanation: Frappe/ERPNext strictly refuses to run as the root user for security reasons. We create a user named `frappe` and give it sudo (admin) rights.*
 ```bash
 sudo adduser frappe
 sudo usermod -aG sudo frappe
 su - frappe
 ```
-
-*Note: Run all subsequent commands as the `frappe` user.*
+> [!IMPORTANT]  
+> After running `su - frappe`, your terminal prompt will change. You are now acting as the `frappe` user. All the following commands must be run as this user!
 
 ## 3. Install Python, Node.js, Redis, and Nginx
-ERPNext requires Python, Node.js (for asset compilation), Redis (for caching and queues), and Nginx (for web serving).
-
+*Explanation: ERPNext is built on Python and uses Node.js for building web assets. Redis is used for caching and background tasks, while Nginx will act as the web server.*
 ```bash
-# Install Python and dependencies
+# Install Python 3.12 virtual environment tools
 sudo apt install -y python3-dev python3-pip python3-venv python3-virtualenv
-sudo apt install -y xvfb libfontconfig wkhtmltopdf libmysqlclient-dev
 
-# Install Node.js (v18) and Yarn
-curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+# Download and run the Node.js setup script (using v20.x for Frappe 15 compatibility)
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+
+# Install Node.js
 sudo apt install -y nodejs
+
+# Install yarn globally (required by Frappe to compile assets)
 sudo npm install -g yarn
 
-# Install Redis, Nginx, and Supervisor
+# Install Redis server, Nginx web server, and Supervisor (process manager)
 sudo apt install -y redis-server nginx supervisor
 ```
 
 ## 4. Install & Configure MariaDB
-ERPNext uses MariaDB as its relational database.
-
+*Explanation: ERPNext relies on MariaDB. We must install it and configure the exact character sets so Frappe doesn't throw encoding errors.*
 ```bash
+# Install MariaDB
 sudo apt install -y mariadb-server mariadb-client
 ```
 
-Configure MariaDB for Frappe by editing the configuration file:
+Now we configure it. Copy and paste this exact block of text to safely append the settings into the configuration file:
 ```bash
-sudo nano /etc/mysql/mariadb.conf.d/50-server.cnf
-```
-Add the following block under `[mysqld]`:
-```ini
+sudo bash -c 'cat << EOF >> /etc/mysql/mariadb.conf.d/50-server.cnf
+
 [mysqld]
 character-set-client-handshake = FALSE
 character-set-server = utf8mb4
@@ -60,34 +58,36 @@ collation-server = utf8mb4_unicode_ci
 
 [mysql]
 default-character-set = utf8mb4
+EOF'
 ```
 
-Restart MariaDB and run the secure installation:
+*Explanation: Restart the database service so it reads the new settings.*
 ```bash
 sudo systemctl restart mariadb
+```
+
+*Explanation: Secure the database. You MUST answer the prompts. Set a strong root password, remove anonymous users, and disallow root login remotely.*
+```bash
 sudo mysql_secure_installation
 ```
-*(Follow the prompts to set a root password, remove anonymous users, and disallow root login remotely)*
 
-## 5. Install Frappe Bench CLI
-Bench is the command-line utility used to manage Frappe environments.
-
+## 5. Install Frappe Bench
+*Explanation: `bench` is the command-line tool you use to manage ERPNext instances.*
 ```bash
-sudo pip3 install frappe-bench
+sudo pip3 install frappe-bench --break-system-packages
 ```
+*(Note: Ubuntu 24.04 requires `--break-system-packages` when installing pip packages globally).*
 
 ## 6. Initialize the Bench Environment
-Create a new directory called `frappe-bench`. (We use version 15 here as the standard target).
-
+*Explanation: We initialize a new environment folder called `frappe-bench` locking it to `version-15`.*
 ```bash
 cd ~
 bench init frappe-bench --frappe-branch version-15
 cd frappe-bench
 ```
 
-## 7. Download Required Applications
-Now we fetch the source code for ERPNext, HRMS, and your custom apps. 
-
+## 7. Download Applications
+*Explanation: We download ERPNext, HRMS, and your two custom GitHub repositories into the bench.*
 ```bash
 # Get Standard Apps
 bench get-app payments
@@ -95,14 +95,12 @@ bench get-app erpnext --branch version-15
 bench get-app hrms --branch version-15
 
 # Get Custom Apps
-# (Replace with your actual git repository URLs)
-bench get-app jahan_kodak https://github.com/your-org/jahan_kodak.git
-bench get-app jk_sync https://github.com/your-org/jk_sync.git
+bench get-app jahan_kodak https://github.com/Mohammad-Mansoor/new_erp_next.git
+bench get-app jk_sync https://github.com/Mohammad-Mansoor/new_erp_next_jk_sync.git
 ```
 
 ## 8. Create the Local Site
-Create a new Frappe site for this branch. You will be prompted to enter your MariaDB root password, and to create an Administrator password for the ERPNext web UI.
-
+*Explanation: We create the actual website database. It will prompt you for the MariaDB root password you set earlier, and ask you to create the Administrator password for ERPNext.*
 ```bash
 export SITE_NAME="branch01.local"
 
@@ -110,8 +108,7 @@ bench new-site $SITE_NAME
 ```
 
 ## 9. Install Apps on the Local Site
-Install the apps onto your newly created site. Order matters; ERPNext goes first.
-
+*Explanation: We instruct the site to install the database tables for all these apps.*
 ```bash
 bench --site $SITE_NAME install-app payments
 bench --site $SITE_NAME install-app erpnext
@@ -120,28 +117,24 @@ bench --site $SITE_NAME install-app jahan_kodak
 bench --site $SITE_NAME install-app jk_sync
 ```
 
-## 10. Configure Production (Nginx & Supervisor)
-Transition the bench from a development state to a live production state.
-
+## 10. Configure Production Server
+*Explanation: This command automatically generates the Nginx (web) and Supervisor (background worker) configuration files so the site stays alive automatically, even after server reboots.*
 ```bash
 sudo bench setup production frappe
 ```
 
-Ensure the site is set as default:
+*Explanation: This tells Nginx that this site is the default one to load when someone visits the server IP.*
 ```bash
 bench use $SITE_NAME
 ```
 
-## 11. Post-Deployment Steps & Offline Sync Configuration
-1. **Access the Site**: Open your browser and navigate to the local IP address (e.g. `http://192.168.1.100` or `branch01.local`).
-2. **Login**: Use `Administrator` and the password you set in Step 8.
-3. **Run Setup Wizard**: Complete the ERPNext setup wizard.
-4. **Configure Sync Settings**: 
-   - Open `Branch Sync Config`.
-   - Enter this Branch's ID (e.g., `BR01`), making sure it perfectly matches the Cloud Server.
-   - Enter the Cloud Server's URL (e.g., `https://cloud.jahankodak.com`).
-   - Enter the API Secret shared with the Cloud Server for HMAC cryptographic validation.
-5. **Verify POS**: Assign the local terminals/POS Profiles to the correct Warehouse and test a transaction. Verify it appears in `Branch Sync Outbox` and processes smoothly via the background workers.
-
 ---
-**Status**: The Local Server is now LIVE.
+
+## 11. Final Setup
+Your Local Server is now live.
+
+1. Open your web browser and go to your server's IP (or e.g., `http://192.168.1.100`).
+2. Login as `Administrator` using the password you set in step 8.
+3. Finish the ERPNext setup wizard.
+4. Search for **Branch Sync Config**, LEAVE the **Is Cloud Server** box UNCHECKED. Enter your `Branch ID`, your exact `API Secret`, and the `Cloud URL`. 
+5. The background jobs will now automatically start polling the Cloud server!
