@@ -58,6 +58,7 @@ For every row you add, you **MUST** check the box for `Use Same Name`. This guar
 8. `Customer Group` *(Syncs customer categories)*
 9. `Mode of Payment` *(Syncs Cash/Credit configurations)*
 10. `POS Payment Method` *(Syncs the mapping of payments)*
+11. `Company` *(Syncs company configurations so linked Accounts and Warehouses do not break!)*
 
 > [!CAUTION]
 > **NEVER add the following DocTypes to this list:** `Item`, `Item Price`, `Customer`, `Customer Merge Log`, `Stock Entry`, `Stock Ledger Entry`, `POS Invoice`, `POS Closing Entry`, or `GL Entry`. Adding these will cause catastrophic collisions with the `jk_sync` app and corrupt your local inventory math.

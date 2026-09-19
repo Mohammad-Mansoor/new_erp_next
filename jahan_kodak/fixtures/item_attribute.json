@@ -1,5 +1,96 @@
 [
  {
+  "attribute_name": "Test Size",
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Item Attribute",
+  "from_range": 0.0,
+  "increment": 0.0,
+  "item_attribute_values": [
+   {
+    "abbr": "XSL",
+    "attribute_value": "Extra Small",
+    "parent": "Test Size",
+    "parentfield": "item_attribute_values",
+    "parenttype": "Item Attribute"
+   },
+   {
+    "abbr": "S",
+    "attribute_value": "Small",
+    "parent": "Test Size",
+    "parentfield": "item_attribute_values",
+    "parenttype": "Item Attribute"
+   },
+   {
+    "abbr": "M",
+    "attribute_value": "Medium",
+    "parent": "Test Size",
+    "parentfield": "item_attribute_values",
+    "parenttype": "Item Attribute"
+   },
+   {
+    "abbr": "L",
+    "attribute_value": "Large",
+    "parent": "Test Size",
+    "parentfield": "item_attribute_values",
+    "parenttype": "Item Attribute"
+   },
+   {
+    "abbr": "XL",
+    "attribute_value": "Extra Large",
+    "parent": "Test Size",
+    "parentfield": "item_attribute_values",
+    "parenttype": "Item Attribute"
+   },
+   {
+    "abbr": "2XL",
+    "attribute_value": "2XL",
+    "parent": "Test Size",
+    "parentfield": "item_attribute_values",
+    "parenttype": "Item Attribute"
+   }
+  ],
+  "modified": "2026-09-14 21:50:19.700671",
+  "name": "Test Size",
+  "numeric_values": 0,
+  "to_range": 0.0
+ },
+ {
+  "attribute_name": "Test Colour",
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Item Attribute",
+  "from_range": 0.0,
+  "increment": 0.0,
+  "item_attribute_values": [
+   {
+    "abbr": "R",
+    "attribute_value": "Red",
+    "parent": "Test Colour",
+    "parentfield": "item_attribute_values",
+    "parenttype": "Item Attribute"
+   },
+   {
+    "abbr": "G",
+    "attribute_value": "Green",
+    "parent": "Test Colour",
+    "parentfield": "item_attribute_values",
+    "parenttype": "Item Attribute"
+   },
+   {
+    "abbr": "B",
+    "attribute_value": "Blue",
+    "parent": "Test Colour",
+    "parentfield": "item_attribute_values",
+    "parenttype": "Item Attribute"
+   }
+  ],
+  "modified": "2026-09-14 21:50:19.714590",
+  "name": "Test Colour",
+  "numeric_values": 0,
+  "to_range": 0.0
+ },
+ {
   "attribute_name": "Gender",
   "disabled": 0,
   "docstatus": 0,
