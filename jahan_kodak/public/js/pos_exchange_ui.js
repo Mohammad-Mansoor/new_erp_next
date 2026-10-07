@@ -153,10 +153,6 @@ jahan_kodak.POSExchangeUI = class POSExchangeUI {
                 </div>
             </div>
         `);
-        
-        // Initial setup
-        this.fetch_remaining_quantities();
-        this.setup_item_search();
     }
 
     fetch_remaining_quantities() {
