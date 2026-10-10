@@ -28,8 +28,8 @@
         <div class="receipt-meta">
             {% if doc.replacement_invoice %}
             <div style="text-align: center; margin-bottom: 6px;">
-                <img src="https://quickchart.io/barcode?type=code128&text={{ doc.replacement_invoice }}&height=20&width=120"
-                    alt="Barcode" style="margin: 4px auto; display: block;">
+                <img src="{{ get_qr_code_base64(doc.replacement_invoice) }}"
+                    alt="QR Code" style="margin: 4px auto; display: block; width: 100px; height: 100px;">
                 <span style="font-size: 10px;">{{ doc.replacement_invoice }}</span>
             </div>
             {% endif %}

@@ -9,7 +9,7 @@ POS_RECEIPT_HTML = """<div class="pos-receipt">
         {% endif %}
         <div class="receipt-title">SALES RECEIPT</div>
         <div class="meta-row" style="text-align: center;">
-            <img src="https://quickchart.io/barcode?type=code128&text={{ doc.name }}&height=20&width=120" alt="Barcode" style="margin: 4px auto; display: block;">
+            <img src="{{ get_qr_code_base64(doc.name) }}" alt="QR Code" style="margin: 4px auto; display: block; width: 100px; height: 100px;">
             <span>Date: {{ frappe.utils.format_datetime(doc.posting_date ~ ' ' ~ doc.posting_time, "dd-MM-yyyy hh:mm a") if doc.posting_date and doc.posting_time else frappe.utils.formatdate(doc.posting_date) }}</span>
         </div>
     </div>

@@ -79,7 +79,7 @@ POS_RECEIPT_HTML = r"""
 
         <div class="receipt-meta" style="text-align: center;">
             <div style="margin-bottom: 6px;">
-                <img src="https://quickchart.io/barcode?type=code128&text={{ doc.name }}&height=20&width=120" alt="Barcode" style="margin: 4px auto; display: block;">
+                <img src="{{ get_qr_code_base64(doc.name) }}" alt="QR Code" style="margin: 4px auto; display: block; width: 100px; height: 100px;">
             </div>
 
             <div>

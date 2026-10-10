@@ -110,5 +110,12 @@
   "modified": "2026-07-23 20:27:53.820785",
   "name": "Reject Payroll",
   "workflow_action_name": "Reject Payroll"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-08-16 10:37:21.522718",
+  "name": "Send for Approval",
+  "workflow_action_name": "Send for Approval"
  }
 ]

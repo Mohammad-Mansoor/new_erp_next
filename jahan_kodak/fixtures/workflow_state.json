@@ -133,5 +133,14 @@
   "name": "Draft",
   "style": "Inverse",
   "workflow_state_name": "Draft"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-08-16 10:35:34.797234",
+  "name": "Pending Approval",
+  "style": "",
+  "workflow_state_name": "Pending Approval"
  }
 ]
