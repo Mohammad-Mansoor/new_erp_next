@@ -36,7 +36,8 @@ page_js = {
 
 # include js in doctype views
 doctype_js = {
-    "Item": "public/js/item.js"
+    "Item": "public/js/item.js",
+    "Purchase Receipt": "public/js/purchase_receipt_bulk_print.js"
 }
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
@@ -84,10 +85,6 @@ doc_events = {
 	"Purchase Receipt": {
 		"on_submit": "jahan_kodak.purchase_receipt_utils.update_selling_rates"
 	}
-}
-
-doctype_js = {
-	"Purchase Receipt": "public/js/purchase_receipt_bulk_print.js"
 }
 
 # Installation
