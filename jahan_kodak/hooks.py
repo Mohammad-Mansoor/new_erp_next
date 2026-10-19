@@ -80,6 +80,9 @@ doc_events = {
 	},
 	"POS Invoice": {
 		"on_submit": "jahan_kodak.api.realtime_pos.auto_consolidate_pos_invoice"
+	},
+	"Purchase Receipt": {
+		"on_submit": "jahan_kodak.purchase_receipt_utils.update_selling_rates"
 	}
 }
 
@@ -92,6 +95,7 @@ doctype_js = {
 
 # before_install = "jahan_kodak.install.before_install"
 # after_install = "jahan_kodak.install.after_install"
+after_migrate = "jahan_kodak.purchase_receipt_utils.setup_custom_fields"
 
 # Uninstallation
 # ------------

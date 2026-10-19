@@ -70,7 +70,7 @@ EOF'
 ```bash
 sudo systemctl restart mariadb
 ```
-
+/////////////////////////////////////
 *Explanation: Secure the database. You MUST answer the prompts. Set a strong root password, remove anonymous users, disallow root login remotely, and remove the test database.*
 ```bash
 sudo mysql_secure_installation
