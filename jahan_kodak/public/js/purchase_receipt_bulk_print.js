@@ -14,7 +14,27 @@ frappe.ui.form.on('Purchase Receipt', {
                 frappe.call({
                     method: 'jahan_kodak.item_utils.get_bulk_barcode_html',
                     args: {
-                        receipt_name: frm.doc.name
+                        docname: frm.doc.name,
+                        doctype: 'Purchase Receipt',
+                        code_type: 'barcode'
+                    },
+                    callback: function(r) {
+                        if (r.message) {
+                            var w = window.open();
+                            w.document.write(r.message);
+                            w.document.close();
+                        }
+                    }
+                });
+            }, __('Print'));
+
+            frm.add_custom_button(__('Print QR Codes'), function() {
+                frappe.call({
+                    method: 'jahan_kodak.item_utils.get_bulk_barcode_html',
+                    args: {
+                        docname: frm.doc.name,
+                        doctype: 'Purchase Receipt',
+                        code_type: 'qr'
                     },
                     callback: function(r) {
                         if (r.message) {

@@ -30,14 +30,16 @@ page_js = {
     "point-of-sale": [
         "public/js/pos_quick_return_v2.js",
         "public/js/pos_exchange_ui.js",
-        "public/js/pos_single_key_workflow.js"
+        "public/js/pos_single_key_workflow.js",
+        "public/js/pos_discount_toggle.js"
     ]
 }
 
 # include js in doctype views
 doctype_js = {
     "Item": "public/js/item.js",
-    "Purchase Receipt": "public/js/purchase_receipt_bulk_print.js"
+    "Purchase Receipt": "public/js/purchase_receipt_bulk_print.js",
+    "Purchase Invoice": "public/js/purchase_invoice_bulk_print.js"
 }
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}

@@ -117,25 +117,36 @@ def get_barcode_svg(text, height=80, bar_width=3, show_text=False):
 
 
 @frappe.whitelist()
-def get_bulk_barcode_html(receipt_name):
+def get_bulk_barcode_html(docname=None, receipt_name=None, doctype=None, code_type="barcode"):
 	"""
-	Generates raw HTML for bulk printing barcode stickers based on a Purchase Receipt's items and quantities.
+	Generates raw HTML for bulk printing barcode / QR stickers based on a Purchase Receipt or Purchase Invoice items and quantities.
 	"""
-	if not receipt_name:
-		frappe.throw("Purchase Receipt name is required")
+	name_to_use = docname or receipt_name
+	if not name_to_use:
+		frappe.throw("Document name is required")
 
-	receipt = frappe.get_doc("Purchase Receipt", receipt_name)
+	# Auto-detect doctype if not provided
+	if not doctype:
+		if receipt_name or name_to_use.startswith("MAT-PRE-") or frappe.db.exists("Purchase Receipt", name_to_use):
+			doctype = "Purchase Receipt"
+		elif name_to_use.startswith("ACC-PINV-") or frappe.db.exists("Purchase Invoice", name_to_use):
+			doctype = "Purchase Invoice"
+		else:
+			doctype = "Purchase Receipt"
+
+	doc = frappe.get_doc(doctype, name_to_use)
 	
 	html_parts = []
-	html_parts.append('''<!DOCTYPE html>
+	doc_title = f"{doctype} - {name_to_use}"
+	html_parts.append(f'''<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Bulk Print Barcodes - ''' + receipt_name + '''</title>
+	<title>Bulk Print Stickers - {doc_title}</title>
 	<style>
-		@page { size: 50mm 35mm; margin: 0; }
-		html, body { margin: 0; padding: 0; background-color: #ffffff; color: #000000; font-family: Arial, sans-serif; }
-		.sticker {
+		@page {{ size: 50mm 35mm; margin: 0; }}
+		html, body {{ margin: 0; padding: 0; background-color: #ffffff; color: #000000; font-family: 'Segoe UI', Tahoma, Arial, sans-serif; }}
+		.sticker {{
 			width: 50mm;
 			height: 35mm;
 			box-sizing: border-box;
@@ -146,49 +157,109 @@ def get_bulk_barcode_html(receipt_name):
 			justify-content: space-between;
 			padding: 1.5mm 1mm;
 			text-align: center;
-		}
-		.sticker:last-child {
+		}}
+		.sticker:last-child {{
 			page-break-after: auto;
-		}
-		.header { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-		.subheader { font-size: 10px; font-weight: bold; color: black; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-		.barcode-container { width: 46mm; height: 18mm; margin: 0 auto; }
-		.price { font-size: 12px; font-weight: bold; color: black; margin-top: 2px; }
+		}}
+		.header {{
+			font-size: 11px;
+			font-weight: 800;
+			text-transform: uppercase;
+			letter-spacing: 0.5px;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			color: #000000;
+		}}
+		.subheader {{
+			font-size: 11px;
+			font-weight: bold;
+			color: #000000;
+			margin-bottom: 1mm;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			unicode-bidi: plaintext;
+		}}
+		.code-container {{
+			width: 46mm;
+			height: 18mm;
+			margin: 0 auto;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}}
+		.qr-image {{
+			width: 18mm;
+			height: 18mm;
+			object-fit: contain;
+			margin: 0 auto;
+			display: block;
+		}}
+		.price {{
+			font-size: 12px;
+			font-weight: bold;
+			color: #000000;
+			margin-top: 1mm;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}}
 	</style>
 </head>
-<body onload="setTimeout(function(){ window.print(); }, 500);">''')
+<body onload="setTimeout(function(){{ window.print(); }}, 500);">''')
+
+	is_qr = (code_type == "qr")
 
 	# Get items and their prices/barcodes
-	for item_row in receipt.items:
+	for item_row in doc.items:
 		item_doc = frappe.get_doc("Item", item_row.item_code)
 		
-		# Get barcode
+		# Get barcode / QR code payload
 		barcode_val = item_doc.item_code
-		if item_doc.get("barcodes"):
+		if item_doc.get("barcodes") and len(item_doc.barcodes) > 0 and item_doc.barcodes[0].barcode:
 			barcode_val = item_doc.barcodes[0].barcode
 		
-		# Get price
-		item_price = frappe.db.get_value("Item Price", {"item_code": item_doc.name, "selling": 1}, "price_list_rate")
+		# Get selling price:
+		# 1. Row custom selling rate if set
+		item_price = (
+			getattr(item_row, "custom_selling_rate", None)
+			or getattr(item_row, "custom_selling_rate_", None)
+			or getattr(item_row, "custom_selling_price", None)
+		)
+		# 2. Item Price list (selling: 1)
+		if not item_price:
+			item_price = frappe.db.get_value("Item Price", {"item_code": item_doc.name, "selling": 1}, "price_list_rate")
+		# 3. Item standard/valuation rate
 		if not item_price:
 			item_price = item_doc.standard_rate or item_doc.valuation_rate or 0
-		price_str = frappe.utils.fmt_money(item_price) if item_price else ""
+
+		price_str = f"Price: {frappe.utils.fmt_money(item_price)}" if item_price else ""
 		
-		# Generate barcode SVG
-		barcode_svg = get_barcode_svg(barcode_val, height=80, bar_width=3, show_text=False)
-		
+		# Generate code element (QR image or 1D Barcode SVG)
+		if is_qr:
+			qr_uri = get_qr_code_base64(barcode_val)
+			code_element = f'<img class="qr-image" src="{qr_uri}" alt="{barcode_val}" />'
+		else:
+			barcode_svg = get_barcode_svg(barcode_val, height=80, bar_width=3, show_text=False)
+			code_element = barcode_svg
+
 		# Generate QTY times
-		qty = int(item_row.qty)
+		qty = int(frappe.utils.flt(item_row.qty))
+		if qty <= 0:
+			qty = 1
+
 		for _ in range(qty):
 			sticker_html = f'''
 		<div class="sticker">
 			<div>
 				<div class="header">{item_doc.item_code}</div>
-				<div class="subheader">{item_doc.item_name}</div>
+				<div class="subheader" dir="auto">{item_doc.item_name}</div>
 			</div>
-			<div class="barcode-container">
-				{barcode_svg}
+			<div class="code-container">
+				{code_element}
 			</div>
-			<div class="price">Price: {price_str}</div>
+			<div class="price">{price_str}</div>
 		</div>'''
 			html_parts.append(sticker_html)
 
