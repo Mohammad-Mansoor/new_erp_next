@@ -78,7 +78,17 @@ jahan_kodak.POSExchangeUI = class POSExchangeUI {
                 <div class="col-md-8">
                     <!-- Return Items -->
                     <div class="exchange-section return-items-section">
-                        <h4 style="margin-top: 0;">${__("Return Items")}</h4>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <h4 style="margin: 0; color: var(--text-color);">${__("Return Items")}</h4>
+                            <div class="return-actions-container">
+                                <button type="button" class="btn btn-xs btn-primary btn-return-all" style="font-weight: 600; padding: 4px 10px; border-radius: 4px;">
+                                    <i class="fa fa-reply-all"></i> ${__("Return All Remaining")}
+                                </button>
+                                <button type="button" class="btn btn-xs btn-default btn-clear-all" style="font-weight: 600; padding: 4px 8px; border-radius: 4px; margin-left: 5px;">
+                                    ${__("Clear")}
+                                </button>
+                            </div>
+                        </div>
                         <table class="table table-bordered">
                             <thead class="bg-light">
                                 <tr>
@@ -212,7 +222,10 @@ jahan_kodak.POSExchangeUI = class POSExchangeUI {
 
         if (!has_returnable) {
             tbody.html('<tr><td colspan="7" class="text-center text-muted">${__("No returnable items available on this invoice.")}</td></tr>');
+            this.$wrapper.find(".return-actions-container").hide();
             frappe.show_alert({message: __("This invoice has no remaining items available for return."), indicator: "orange"});
+        } else {
+            this.$wrapper.find(".return-actions-container").show();
         }
     }
 
@@ -379,10 +392,60 @@ jahan_kodak.POSExchangeUI = class POSExchangeUI {
             me.debounce_calculate();
         });
 
+        // Handle Return All and Clear All
+        this.$wrapper.on("click", ".btn-return-all", () => {
+            this.fill_all_return_quantities();
+        });
+
+        this.$wrapper.on("click", ".btn-clear-all", () => {
+            this.clear_all_return_quantities();
+        });
+
         // Handle Submit
         this.$wrapper.on("click", "#btn-submit-exchange", () => {
             this.submit_exchange();
         });
+    }
+
+    fill_all_return_quantities() {
+        const me = this;
+        let updated_any = false;
+
+        this.$wrapper.find(".return-qty-input").each(function() {
+            const $input = $(this);
+            const item_code = $input.attr("data-item-code");
+            const remaining = parseInt($input.attr("data-remaining")) || 0;
+            const rate = parseFloat($input.attr("data-rate")) || 0;
+
+            if (remaining > 0) {
+                $input.val(remaining);
+                me.state.return_items[item_code] = remaining;
+
+                // Instantly update the Total Price cell for this row
+                $input.closest("tr").find(".return-amount-cell").text(
+                    format_currency(remaining * rate, me.original_invoice_doc.currency)
+                );
+                updated_any = true;
+            }
+        });
+
+        if (updated_any) {
+            this.calculate_exchange();
+        }
+    }
+
+    clear_all_return_quantities() {
+        const me = this;
+        this.$wrapper.find(".return-qty-input").each(function() {
+            const $input = $(this);
+            const item_code = $input.attr("data-item-code");
+            $input.val('');
+            delete me.state.return_items[item_code];
+            $input.closest("tr").find(".return-amount-cell").text(
+                format_currency(0, me.original_invoice_doc.currency)
+            );
+        });
+        this.calculate_exchange();
     }
 
     debounce_calculate() {

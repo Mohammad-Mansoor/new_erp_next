@@ -80,6 +80,7 @@ POS_RECEIPT_HTML = r"""
         <div class="receipt-meta" style="text-align: center;">
             <div style="margin-bottom: 6px;">
                 <img src="{{ get_qr_code_base64(doc.name) }}" alt="QR Code" style="margin: 4px auto; display: block; width: 100px; height: 100px;">
+                <span style="font-size: 10.5px; font-weight: bold; display: block; margin-top: 2px;">{{ doc.name }}</span>
             </div>
 
             <div>

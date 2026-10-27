@@ -10,6 +10,7 @@ POS_RECEIPT_HTML = """<div class="pos-receipt">
         <div class="receipt-title">SALES RECEIPT</div>
         <div class="meta-row" style="text-align: center;">
             <img src="{{ get_qr_code_base64(doc.name) }}" alt="QR Code" style="margin: 4px auto; display: block; width: 100px; height: 100px;">
+            <span style="font-size: 10.5px; font-weight: bold; display: block; margin-top: 2px;">{{ doc.name }}</span>
             <span>Date: {{ frappe.utils.format_datetime(doc.posting_date ~ ' ' ~ doc.posting_time, "dd-MM-yyyy hh:mm a") if doc.posting_date and doc.posting_time else frappe.utils.formatdate(doc.posting_date) }}</span>
             <div style="display: flex; justify-content: space-between; flex-wrap: wrap; font-size: 9.5px; line-height: 1.2; margin-top: 3px; padding: 0 1px;">
                 <span><b>Cashier:</b> {{ frappe.get_fullname(doc.owner) or doc.owner }}</span>
