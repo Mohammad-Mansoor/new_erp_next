@@ -531,13 +531,21 @@ jahan_kodak.POSExchangeUI = class POSExchangeUI {
 
         const pm_container = this.$wrapper.find("#payment-method-container");
         const pm_select = this.$wrapper.find("#payment-method-select");
+        const pm_label = pm_container.find("label");
         
-        if (p.payment_required && p.settlement_type === "customer_pays") {
+        if (p.payment_required) {
             pm_container.show();
-            if (pm_select.children().length === 0 && p.payment_methods) {
-                // Populate dropdown once
+            if (p.settlement_type === "customer_refund") {
+                pm_label.text(__("Refund Method"));
+            } else {
+                pm_label.text(__("Payment Method"));
+            }
+            if (p.payment_methods && p.payment_methods.length > 0) {
+                const current_val = pm_select.val();
+                pm_select.empty();
                 p.payment_methods.forEach(pm => {
-                    pm_select.append(`<option value="${pm.mode_of_payment}" ${pm.default ? 'selected' : ''}>${pm.mode_of_payment}</option>`);
+                    const is_selected = current_val ? (pm.mode_of_payment === current_val) : pm.default;
+                    pm_select.append(`<option value="${pm.mode_of_payment}" ${is_selected ? 'selected' : ''}>${pm.mode_of_payment}</option>`);
                 });
             }
         } else {
@@ -562,23 +570,31 @@ jahan_kodak.POSExchangeUI = class POSExchangeUI {
         }
 
         // Prepare payment object if required
-        if (preview.payment_required && preview.settlement_type === "customer_pays") {
-            const mode = this.$wrapper.find("#payment-method-select").val();
+        if (preview.payment_required) {
+            let mode = this.$wrapper.find("#payment-method-select").val();
+            if (!mode && preview.default_mode_of_payment) {
+                mode = preview.default_mode_of_payment;
+            }
+            if (!mode && preview.payment_methods && preview.payment_methods.length > 0) {
+                const def = preview.payment_methods.find(pm => pm.default);
+                mode = def ? def.mode_of_payment : preview.payment_methods[0].mode_of_payment;
+            }
             if (!mode) {
                 frappe.show_alert({message: __("Please select a payment method."), indicator: "red"});
                 return;
             }
-            payload.payments = [{
-                mode_of_payment: mode,
-                amount: Math.abs(preview.difference)
-            }];
-        } else if (preview.payment_required && preview.settlement_type === "customer_refund") {
-            // For refund, backend handles the default cash refund if not specified, 
-            // or we pass the default POS refund mode. We'll pass Cash by default.
-            payload.payments = [{
-                mode_of_payment: "Cash",
-                amount: preview.difference // negative
-            }];
+
+            if (preview.settlement_type === "customer_pays") {
+                payload.payments = [{
+                    mode_of_payment: mode,
+                    amount: Math.abs(preview.difference)
+                }];
+            } else if (preview.settlement_type === "customer_refund") {
+                payload.payments = [{
+                    mode_of_payment: mode,
+                    amount: preview.difference // negative
+                }];
+            }
         }
 
         // Lock UI

@@ -96,15 +96,36 @@ def calculate_exchange(payload):
         settlement_type = "customer_refund"
         
     payment_methods = []
-    if settlement_type == "customer_pays":
-        # Fetch payment methods for POS Profile
-        pos_profile = context["current_pos_profile"]
-        profile_doc = frappe.get_doc("POS Profile", pos_profile)
-        for pm in profile_doc.payments:
-            payment_methods.append({
-                "mode_of_payment": pm.mode_of_payment,
-                "default": pm.default
-            })
+    default_mode_of_payment = None
+    if settlement_type != "exact":
+        pos_profile = context.get("current_pos_profile")
+        if pos_profile and frappe.db.exists("POS Profile", pos_profile):
+            profile_doc = frappe.get_cached_doc("POS Profile", pos_profile)
+            for pm in profile_doc.payments:
+                is_default = bool(pm.default)
+                if settlement_type == "customer_refund":
+                    if pm.allow_in_returns or is_default:
+                        payment_methods.append({
+                            "mode_of_payment": pm.mode_of_payment,
+                            "default": pm.default
+                        })
+                else:
+                    payment_methods.append({
+                        "mode_of_payment": pm.mode_of_payment,
+                        "default": pm.default
+                    })
+                if is_default:
+                    default_mode_of_payment = pm.mode_of_payment
+
+            if not payment_methods and profile_doc.payments:
+                for pm in profile_doc.payments:
+                    payment_methods.append({
+                        "mode_of_payment": pm.mode_of_payment,
+                        "default": pm.default
+                    })
+
+            if not default_mode_of_payment and payment_methods:
+                default_mode_of_payment = payment_methods[0]["mode_of_payment"]
             
     # Also fetch the items' rates and amounts for the frontend
     replacement_items_preview = []
@@ -126,6 +147,7 @@ def calculate_exchange(payload):
         "currency": context["original_invoice"].currency,
         "payment_required": settlement_type != "exact",
         "payment_methods": payment_methods,
+        "default_mode_of_payment": default_mode_of_payment,
         "replacement_items_preview": replacement_items_preview
     }
 
